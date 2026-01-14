@@ -2,21 +2,79 @@
 
 import React, { useState } from 'react';
 import { Mail, Lock, Globe } from 'lucide-react';
+import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 const BitsWavingLogin: React.FC = () => {
+  const router = useRouter();
   const [isLogin, setIsLogin] = useState<boolean>(true);
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
+  const [error, setError] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false);
 
-  const handleSubmit = (): void => {
-    // Authentication logic will go here
-    console.log('Form submitted:', { email, password });
+  const handleSubmit = async (): Promise<void> => {
+    setError('');
+    setLoading(true);
+
+    try {
+      if (isLogin) {
+        // Sign in with credentials
+        const result = await signIn('credentials', {
+          email,
+          password,
+          redirect: false,
+        });
+
+        if (result?.error) {
+          setError('Invalid email or password');
+        } else {
+          router.push('/');
+        }
+      } else {
+        // Register new user
+        if (password !== confirmPassword) {
+          setError('Passwords do not match');
+          setLoading(false);
+          return;
+        }
+
+        const response = await fetch('/api/auth/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password }),
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          setError(data.error || 'Registration failed');
+        } else {
+          // Auto sign in after registration
+          const result = await signIn('credentials', {
+            email,
+            password,
+            redirect: false,
+          });
+
+          if (result?.error) {
+            setError('Registration successful but login failed. Please try logging in.');
+          } else {
+            router.push('/');
+          }
+        }
+      }
+    } catch (err) {
+      setError('An error occurred. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const handleGoogleLogin = (): void => {
-    // Google OAuth logic will go here
-    console.log('Google login clicked');
+  const handleGoogleLogin = async (): Promise<void> => {
+    setLoading(true);
+    await signIn('google', { callbackUrl: '/' });
   };
 
   return (
@@ -51,10 +109,18 @@ const BitsWavingLogin: React.FC = () => {
               {isLogin ? 'Welcome Back' : 'Create Account'}
             </h2>
 
+            {/* Error Message */}
+            {error && (
+              <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl text-red-600 text-sm">
+                {error}
+              </div>
+            )}
+
             {/* Google Login Button */}
             <button
               onClick={handleGoogleLogin}
-              className="w-full flex items-center justify-center space-x-3 px-4 py-3 bg-white border-2 border-gray-300 rounded-xl hover:bg-gray-50 transition font-medium text-gray-700 mb-6"
+              disabled={loading}
+              className="w-full flex items-center justify-center space-x-3 px-4 py-3 bg-white border-2 border-gray-300 rounded-xl hover:bg-gray-50 transition font-medium text-gray-700 mb-6 disabled:opacity-50"
             >
               <svg className="w-5 h-5" viewBox="0 0 24 24">
                 <path
@@ -102,6 +168,7 @@ const BitsWavingLogin: React.FC = () => {
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
                     placeholder="your@email.com"
                     className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    disabled={loading}
                   />
                 </div>
               </div>
@@ -119,6 +186,7 @@ const BitsWavingLogin: React.FC = () => {
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
                     placeholder="••••••••"
                     className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    disabled={loading}
                   />
                 </div>
               </div>
@@ -137,6 +205,7 @@ const BitsWavingLogin: React.FC = () => {
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) => setConfirmPassword(e.target.value)}
                       placeholder="••••••••"
                       className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      disabled={loading}
                     />
                   </div>
                 </div>
@@ -154,9 +223,10 @@ const BitsWavingLogin: React.FC = () => {
               {/* Submit Button */}
               <button
                 onClick={handleSubmit}
-                className="w-full py-3 bg-black text-white rounded-xl hover:bg-gray-800 transition font-medium"
+                disabled={loading}
+                className="w-full py-3 bg-black text-white rounded-xl hover:bg-gray-800 transition font-medium disabled:opacity-50"
               >
-                {isLogin ? 'Sign In' : 'Create Account'}
+                {loading ? 'Processing...' : (isLogin ? 'Sign In' : 'Create Account')}
               </button>
             </div>
 
@@ -165,8 +235,12 @@ const BitsWavingLogin: React.FC = () => {
               <p className="text-gray-600">
                 {isLogin ? "Don't have an account? " : "Already have an account? "}
                 <button
-                  onClick={() => setIsLogin(!isLogin)}
+                  onClick={() => {
+                    setIsLogin(!isLogin);
+                    setError('');
+                  }}
                   className="text-blue-600 hover:text-blue-700 font-medium"
+                  disabled={loading}
                 >
                   {isLogin ? 'Sign up' : 'Sign in'}
                 </button>
