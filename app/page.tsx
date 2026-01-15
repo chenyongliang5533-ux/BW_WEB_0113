@@ -44,12 +44,14 @@ const BitsWavingHomepage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
-            <div className="flex items-center space-x-2">
-              <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-500 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-xl">BW</span>
-              </div>
+            <Link href="/" className="flex items-center space-x-2">
+              <img 
+                src="/images/logo.png" 
+                alt="Bitswaving Logo"
+                className="w-10 h-10 object-contain"
+              />
               <span className="text-xl font-semibold text-gray-900">BITSWAVING</span>
-            </div>
+            </Link>
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
