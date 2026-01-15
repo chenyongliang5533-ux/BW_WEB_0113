@@ -82,7 +82,7 @@ const BitsWavingHomepage = () => {
                 onMouseEnter={() => setSupportDropdown(true)}
                 onMouseLeave={() => setSupportDropdown(false)}
               >
-                <button className="flex items-center space-x-1 font-semibold text-gray-700 hover:text-blue-600 transition">
+                <button className="flex items-center space-x-1 font-semibold text-gray-700 hover:bg-gray-100 px-3 py-2 rounded-lg transition">
                   <span>Support</span>
                   <ChevronDown className="w-4 h-4" />
                 </button>
@@ -99,15 +99,15 @@ const BitsWavingHomepage = () => {
                 )}
               </div>
 
-              <a href="#" className="font-semibold text-gray-700 hover:text-blue-600 transition">Use Cases</a>
-              <a href="#" className="font-semibold text-gray-700 hover:text-blue-600 transition">About Us</a>
+              <Link href="#" className="font-semibold text-gray-700 hover:bg-gray-100 px-3 py-2 rounded-lg transition">Use Cases</Link>
+              <Link href="#" className="font-semibold text-gray-700 hover:bg-gray-100 px-3 py-2 rounded-lg transition">About Us</Link>
             </div>
 
             {/* Language Switcher & Login/Profile */}
             <div className="hidden md:flex items-center space-x-4">
               <button 
                 onClick={() => setLanguage(language === 'EN' ? 'ES' : 'EN')}
-                className="flex items-center space-x-1 font-semibold text-gray-700 hover:text-blue-600 transition"
+                className="flex items-center space-x-1 font-semibold text-gray-700 hover:bg-gray-100 px-3 py-2 rounded-lg transition"
               >
                 <Globe className="w-4 h-4" />
                 <span>{language}|{language === 'EN' ? 'ES' : 'EN'}</span>
