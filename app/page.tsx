@@ -2,12 +2,15 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { Menu, X, ChevronDown, Globe } from 'lucide-react';
+import { Menu, X, ChevronDown, Globe, User, LogOut, Package } from 'lucide-react';
+import { useSession, signOut } from 'next-auth/react';
 
 const BitsWavingHomepage = () => {
+  const { data: session, status } = useSession();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [productDropdown, setProductDropdown] = useState(false);
   const [supportDropdown, setSupportDropdown] = useState(false);
+  const [profileDropdown, setProfileDropdown] = useState(false);
   const [language, setLanguage] = useState('EN');
 
   const newsCards = [
@@ -100,7 +103,7 @@ const BitsWavingHomepage = () => {
               <a href="#" className="font-semibold text-gray-700 hover:text-blue-600 transition">About Us</a>
             </div>
 
-            {/* Language Switcher & Login */}
+            {/* Language Switcher & Login/Profile */}
             <div className="hidden md:flex items-center space-x-4">
               <button 
                 onClick={() => setLanguage(language === 'EN' ? 'ES' : 'EN')}
@@ -109,9 +112,64 @@ const BitsWavingHomepage = () => {
                 <Globe className="w-4 h-4" />
                 <span>{language}|{language === 'EN' ? 'ES' : 'EN'}</span>
               </button>
-              <Link href="/login" className="px-5 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition font-medium">
-                Login
-              </Link>
+              
+              {status === 'loading' ? (
+                <div className="w-10 h-10 bg-gray-200 rounded-full animate-pulse"></div>
+              ) : session ? (
+                /* Profile Dropdown */
+                <div 
+                  className="relative"
+                  onMouseEnter={() => setProfileDropdown(true)}
+                  onMouseLeave={() => setProfileDropdown(false)}
+                >
+                  <button className="flex items-center space-x-2">
+                    {session.user?.image ? (
+                      <img 
+                        src={session.user.image} 
+                        alt="Profile"
+                        className="w-10 h-10 rounded-full border-2 border-gray-200 hover:border-blue-500 transition"
+                      />
+                    ) : (
+                      <div className="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center border-2 border-gray-200 hover:border-blue-500 transition">
+                        <User className="w-5 h-5 text-gray-600" />
+                      </div>
+                    )}
+                  </button>
+                  
+                  {profileDropdown && (
+                    <div className="absolute top-full right-0 pt-2 w-48">
+                      <div className="bg-white border border-gray-200 rounded-lg shadow-lg">
+                        <Link 
+                          href="/profile" 
+                          className="flex items-center space-x-2 px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-t-lg"
+                        >
+                          <User className="w-4 h-4" />
+                          <span>My Profile</span>
+                        </Link>
+                        <Link 
+                          href="/orders" 
+                          className="flex items-center space-x-2 px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600"
+                        >
+                          <Package className="w-4 h-4" />
+                          <span>My Orders</span>
+                        </Link>
+                        <button 
+                          onClick={() => signOut({ callbackUrl: '/' })}
+                          className="w-full flex items-center space-x-2 px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-b-lg"
+                        >
+                          <LogOut className="w-4 h-4" />
+                          <span>Logout</span>
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                /* Login Button */
+                <Link href="/login" className="px-5 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition font-medium">
+                  Login
+                </Link>
+              )}
             </div>
 
             {/* Mobile Menu Button */}
