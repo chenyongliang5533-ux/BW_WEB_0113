@@ -6,15 +6,23 @@ export async function GET() {
   try {
     const { blobs } = await list();
 
-    // Transform blob data to match our interface
-    const files = blobs.map(blob => ({
-      id: blob.pathname,
-      filename: blob.pathname.split('/').pop() || blob.pathname,
-      url: blob.url,
-      category: extractCategory(blob.pathname),
-      size: blob.size,
-      uploadedAt: blob.uploadedAt,
-    }));
+    // Filter out folders (they have size 0 and pathname ending with /)
+    // and transform blob data to match our interface
+    const files = blobs
+      .filter(blob => {
+        // Only include actual files (not folders)
+        // Files have extensions and don't end with /
+        const isFolder = blob.pathname.endsWith('/') || blob.size === 0;
+        return !isFolder;
+      })
+      .map(blob => ({
+        id: blob.pathname,
+        filename: blob.pathname.split('/').pop() || blob.pathname,
+        url: blob.url,
+        category: extractCategory(blob.pathname),
+        size: blob.size,
+        uploadedAt: blob.uploadedAt,
+      }));
 
     return NextResponse.json(files);
 
