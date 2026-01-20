@@ -57,15 +57,17 @@ const BWR352ProductPage = () => {
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
             <Link href="/" className="flex items-center space-x-2">
-              <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-500 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-xl">BW</span>
-              </div>
+              <img 
+                src="/images/logo.png" 
+                alt="Bitswaving Logo"
+                className="w-10 h-10 object-contain"
+              />
               <span className="text-xl font-semibold text-gray-900">BITSWAVING</span>
             </Link>
 
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-8">
-              <Link href="/" className="font-semibold text-gray-700 hover:text-blue-600 transition">Home</Link>
+            <div className="hidden md:flex items-center space-x-2">
+              <Link href="/" className="font-semibold text-gray-700 hover:bg-gray-100 px-3 py-2 rounded-lg transition">Home</Link>
               
               {/* Product Dropdown */}
               <div 
@@ -73,15 +75,15 @@ const BWR352ProductPage = () => {
                 onMouseEnter={() => setProductDropdown(true)}
                 onMouseLeave={() => setProductDropdown(false)}
               >
-                <button className="flex items-center space-x-1 font-semibold text-blue-600">
+                <button className="flex items-center space-x-1 font-semibold text-blue-600 bg-blue-50 px-3 py-2 rounded-lg">
                   <span>Product</span>
                   <ChevronDown className="w-4 h-4" />
                 </button>
                 {productDropdown && (
                   <div className="absolute top-full left-0 pt-2 w-48">
                     <div className="bg-white border border-gray-200 rounded-lg shadow-lg">
-                      <a href="#" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-t-lg">BWR-352</a>
-                      <a href="#" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600">BW Cloud</a>
+                      <Link href="/product/bwr-352" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-t-lg">BWR-352</Link>
+                      <Link href="/product/bw-cloud" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600">BW Cloud</Link>
                       <a href="#" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-b-lg">Accessories</a>
                     </div>
                   </div>
@@ -94,25 +96,25 @@ const BWR352ProductPage = () => {
                 onMouseEnter={() => setSupportDropdown(true)}
                 onMouseLeave={() => setSupportDropdown(false)}
               >
-                <button className="flex items-center space-x-1 font-semibold text-gray-700 hover:text-blue-600 transition">
+                <button className="flex items-center space-x-1 font-semibold text-gray-700 hover:bg-gray-100 px-3 py-2 rounded-lg transition">
                   <span>Support</span>
                   <ChevronDown className="w-4 h-4" />
                 </button>
                 {supportDropdown && (
                   <div className="absolute top-full left-0 pt-2 w-48">
                     <div className="bg-white border border-gray-200 rounded-lg shadow-lg">
-                      <a href="#" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-t-lg">Datasheet</a>
-                      <a href="#" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600">User Manual</a>
-                      <a href="#" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600">Firmware</a>
-                      <a href="#" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600">Catalog</a>
-                      <a href="#" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-b-lg">Certificates</a>
+                      <Link href="/support#datasheet" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-t-lg">Datasheet</Link>
+                      <Link href="/support#manual" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600">User Manual</Link>
+                      <Link href="/support#firmware" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600">Firmware</Link>
+                      <Link href="/support#catalog" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600">Catalog</Link>
+                      <Link href="/support#certificate" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-b-lg">Certificates</Link>
                     </div>
                   </div>
                 )}
               </div>
 
-              <a href="#" className="font-semibold text-gray-700 hover:text-blue-600 transition">Use Cases</a>
-              <a href="#" className="font-semibold text-gray-700 hover:text-blue-600 transition">About Us</a>
+              <Link href="/use-cases" className="font-semibold text-gray-700 hover:bg-gray-100 px-3 py-2 rounded-lg transition">Use Cases</Link>
+              <Link href="/about" className="font-semibold text-gray-700 hover:bg-gray-100 px-3 py-2 rounded-lg transition">About Us</Link>
             </div>
 
             {/* Right Side */}
