@@ -36,13 +36,14 @@ export async function POST(request: Request) {
     // Generate verification code
     const verificationCode = generateVerificationCode();
     const expiresAt = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes
+    const expiresAtString = expiresAt.toISOString(); // Convert to ISO string
 
     // Store verification code in database (you'll need to create this table)
     await sql`
       INSERT INTO verification_codes (email, code, expires_at, created_at)
-      VALUES (${email}, ${verificationCode}, ${expiresAt}, NOW())
+      VALUES (${email}, ${verificationCode}, ${expiresAtString}, NOW())
       ON CONFLICT (email) 
-      DO UPDATE SET code = ${verificationCode}, expires_at = ${expiresAt}, created_at = NOW()
+      DO UPDATE SET code = ${verificationCode}, expires_at = ${expiresAtString}, created_at = NOW()
     `;
 
     // Send email via Resend
