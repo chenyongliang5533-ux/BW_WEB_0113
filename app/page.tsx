@@ -20,7 +20,7 @@ const BitsWavingHomepage = () => {
       description: "Experience unparalleled connectivity with our latest 5G industrial router featuring dual SIM failover and industrial-grade durability.",
       date: "Jan 2026",
       tag: "Product Launch",
-      bgColor: "bg-pink-50"
+      bgColor: "bg-blue-50", 
     },
     {
       title: "BW Cloud Platform Now Available",
@@ -34,7 +34,7 @@ const BitsWavingHomepage = () => {
       description: "Learn how a leading automotive manufacturer achieved 99.9% uptime using BWR series routers in their production line.",
       date: "Nov 2025",
       tag: "Use Case",
-      bgColor: "bg-gray-50"
+      bgColor: "bg-indigo-50"
     }
   ];
 
@@ -51,12 +51,12 @@ const BitsWavingHomepage = () => {
                 alt="Bitswaving Logo"
                 className="w-10 h-10 object-contain"
               />
-              <span className="text-xl font-semibold text-gray-900">BITSWAVING</span>
+              <span className="text-xl text-gray-900">BITSWAVING</span>
             </Link>
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
-              <a href="#" className="font-semibold text-gray-700 hover:text-blue-600 transition">Home</a>
+              <a href="#" className="text-gray-700 hover:bg-gray-100 px-3 py-2 rounded-lg transition">{t.nav.home}</a>
               
               {/* Product Dropdown */}
               <div 
@@ -64,16 +64,16 @@ const BitsWavingHomepage = () => {
                 onMouseEnter={() => setProductDropdown(true)}
                 onMouseLeave={() => setProductDropdown(false)}
               >
-                <button className="flex items-center space-x-1 font-semibold text-gray-700 hover:text-blue-600 transition">
-                  <span>Product</span>
+                <button className="flex items-center space-x-1 text-gray-700 hover:bg-gray-100 px-3 py-2 rounded-lg transition">
+                  <span>{t.nav.product}</span>
                   <ChevronDown className="w-4 h-4" />
                 </button>
                 {productDropdown && (
                   <div className="absolute top-full left-0 pt-2 w-48">
                     <div className="bg-white border border-gray-200 rounded-lg shadow-lg">
-                      <Link href="/product/bwr-352" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-t-lg">BWR-352</Link>
-                      <Link href="/product/bw-cloud" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600">BW Cloud</Link>
-                      <Link href="/product/accessories" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-b-lg">Accessories</Link>
+                      <Link href="/product/bwr-352" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-t-lg">{t.products.bwr352}</Link>
+                      <Link href="/product/bw-cloud" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600">{t.products.bwCloud}</Link>
+                      <Link href="/product/accessories" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-b-lg">{t.products.accessories}</Link>
                     </div>
                   </div>
                 )}
@@ -85,25 +85,25 @@ const BitsWavingHomepage = () => {
                 onMouseEnter={() => setSupportDropdown(true)}
                 onMouseLeave={() => setSupportDropdown(false)}
               >
-                <button className="flex items-center space-x-1 font-semibold text-gray-700 hover:bg-gray-100 px-3 py-2 rounded-lg transition">
-                  <span>Support</span>
+                <button className="flex items-center space-x-1 text-gray-700 hover:bg-gray-100 px-3 py-2 rounded-lg transition">
+                  <span>{t.nav.support}</span>
                   <ChevronDown className="w-4 h-4" />
                 </button>
                 {supportDropdown && (
                   <div className="absolute top-full left-0 pt-2 w-48">
                     <div className="bg-white border border-gray-200 rounded-lg shadow-lg">
-                      <Link href="/support#datasheet" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-t-lg">Datasheet</Link>
-                      <Link href="/support#manual" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600">User Manual</Link>
-                      <Link href="/support#firmware" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600">Firmware</Link>
-                      <Link href="/support#catalog" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600">Catalog</Link>
-                      <Link href="/support#certificate" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-b-lg">Certificates</Link>
+                      <Link href="/support#datasheet" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-t-lg">{t.support.datasheet}</Link>
+                      <Link href="/support#manual" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600">{t.support.userManual}</Link>
+                      <Link href="/support#firmware" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600">{t.support.firmware}</Link>
+                      <Link href="/support#catalog" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600">{t.support.catalog}</Link>
+                      <Link href="/support#certificate" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-b-lg">{t.support.certificates}</Link>
                     </div>
                   </div>
                 )}
               </div>
 
-              <Link href="/use-cases" className="font-semibold text-gray-700 hover:bg-gray-100 px-3 py-2 rounded-lg transition">Use Cases</Link>
-              <Link href="/about" className="font-semibold text-gray-700 hover:bg-gray-100 px-3 py-2 rounded-lg transition">About Us</Link>
+              <Link href="/use-cases" className="text-gray-700 hover:bg-gray-100 px-3 py-2 rounded-lg transition">{t.nav.useCases}</Link>
+              <Link href="/about" className="text-gray-700 hover:bg-gray-100 px-3 py-2 rounded-lg transition">{t.nav.aboutUs}</Link>
             </div>
 
             {/* Language Switcher & Login/Profile */}
@@ -208,29 +208,23 @@ const BitsWavingHomepage = () => {
         )}
       </header>
 
-      {/* Hero Section - Morandi Blue with Beveled Corners */}
-      <div className="bg-blue-100 mx-4 sm:mx-6 lg:mx-8 mt-8 rounded-3xl">
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-20 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-800">
-            Industrial Connectivity Solutions
-          </h1>
-          <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-            Reliable, secure, and intelligent networking equipment for Industry 4.0
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="px-8 py-3 bg-white text-blue-600 rounded-xl font-semibold hover:bg-gray-50 transition shadow-sm">
-              Explore Products
-            </button>
-            <button className="px-8 py-3 border-2 border-gray-300 text-gray-700 rounded-xl font-semibold hover:bg-white transition">
-              View Use Cases
-            </button>
-          </div>
-        </div>
-      </div>
+      {/* Hero Section */}
+			<div className="mt-8">
+				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+					<div className="bg-blue-100 rounded-3xl py-16 text-center">
+						<h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-800">
+							Industrial Connectivity Solutions
+						</h1>
+						<p className="text-xl text-gray-600 mb-6 max-w-3xl mx-auto">
+							Reliable, secure, and intelligent networking equipment for Industry 4.0
+						</p>
+					</div>
+				</div>
+			</div>
 
       {/* Main Content - 3 Cards Grid */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <h2 className="text-3xl font-bold text-gray-900 mb-8">Latest News & Updates</h2>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <h2 className="text-2xl text-gray-900 mb-8">{t.news.title}</h2>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {newsCards.map((card, index) => (
@@ -250,20 +244,19 @@ const BitsWavingHomepage = () => {
               <p className="text-gray-600 mb-6 leading-relaxed">
                 {card.description}
               </p>
-              <button className="text-blue-600 font-medium hover:text-blue-700 transition">
-                Learn more →
-              </button>
             </div>
           ))}
         </div>
       </div>
 
-      {/* Footer - Beveled Light Gray Card */}
-      <div className="px-4 sm:px-6 lg:px-8 pb-8">
-        <footer className="max-w-7xl mx-auto bg-gray-100 rounded-3xl py-8 text-center">
-          <p className="text-gray-600">© 2026 Bitswaving. All rights reserved.</p>
-        </footer>
-      </div>
+      {/* Footer */}
+		<div className="px-4 sm:px-6 lg:px-8 pb-8">
+			<footer className="max-w-7xl mx-auto py-8 text-center">
+				<p className="text-gray-500">
+				© 2026 Bitswaving. All rights reserved.
+				</p>
+			</footer>
+		</div>
     </div>
   );
 };

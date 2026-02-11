@@ -13,8 +13,8 @@ export const translations = {
       logout: "Logout",
     },
     products: {
-      bwr352: "BWR-352",
-      bwCloud: "BW Cloud",
+      bwr352: "BWR_352",
+      bwCloud: "BW_Cloud",
       accessories: "Accessories",
     },
     support: {
