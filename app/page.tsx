@@ -4,14 +4,15 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { Menu, X, ChevronDown, Globe, User, LogOut, Package } from 'lucide-react';
 import { useSession, signOut } from 'next-auth/react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const BitsWavingHomepage = () => {
   const { data: session, status } = useSession();
+  const { language, setLanguage, t } = useLanguage();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [productDropdown, setProductDropdown] = useState(false);
   const [supportDropdown, setSupportDropdown] = useState(false);
   const [profileDropdown, setProfileDropdown] = useState(false);
-  const [language, setLanguage] = useState('EN');
 
   const newsCards = [
     {
@@ -55,7 +56,7 @@ const BitsWavingHomepage = () => {
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
-              <a href="#" className="font-semibold text-gray-700 hover:bg-gray-100 px-3 py-2 rounded-lg transition">Home</a>
+              <a href="#" className="font-semibold text-gray-700 hover:text-blue-600 transition">Home</a>
               
               {/* Product Dropdown */}
               <div 
@@ -63,7 +64,7 @@ const BitsWavingHomepage = () => {
                 onMouseEnter={() => setProductDropdown(true)}
                 onMouseLeave={() => setProductDropdown(false)}
               >
-                <button className="flex items-center space-x-1 font-semibold text-gray-700 hover:bg-gray-100 px-3 py-2 rounded-lg transition">
+                <button className="flex items-center space-x-1 font-semibold text-gray-700 hover:text-blue-600 transition">
                   <span>Product</span>
                   <ChevronDown className="w-4 h-4" />
                 </button>
@@ -108,11 +109,11 @@ const BitsWavingHomepage = () => {
             {/* Language Switcher & Login/Profile */}
             <div className="hidden md:flex items-center space-x-4">
               <button 
-                onClick={() => setLanguage(language === 'EN' ? 'ES' : 'EN')}
+                onClick={() => setLanguage(language === 'en' ? 'es' : 'en')}
                 className="flex items-center space-x-1 font-semibold text-gray-700 hover:bg-gray-100 px-3 py-2 rounded-lg transition"
               >
                 <Globe className="w-4 h-4" />
-                <span>{language}|{language === 'EN' ? 'ES' : 'EN'}</span>
+                <span>{language.toUpperCase()}|{language === 'en' ? 'ES' : 'EN'}</span>
               </button>
               
               {status === 'loading' ? (
@@ -146,21 +147,21 @@ const BitsWavingHomepage = () => {
                           className="flex items-center space-x-2 px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-t-lg"
                         >
                           <User className="w-4 h-4" />
-                          <span>My Profile</span>
+                          <span>{t.nav.myProfile}</span>
                         </Link>
                         <Link 
                           href="/orders" 
                           className="flex items-center space-x-2 px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600"
                         >
                           <Package className="w-4 h-4" />
-                          <span>My Orders</span>
+                          <span>{t.nav.myOrders}</span>
                         </Link>
                         <button 
                           onClick={() => signOut({ callbackUrl: '/' })}
                           className="w-full flex items-center space-x-2 px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-b-lg"
                         >
                           <LogOut className="w-4 h-4" />
-                          <span>Logout</span>
+                          <span>{t.nav.logout}</span>
                         </button>
                       </div>
                     </div>
@@ -169,7 +170,7 @@ const BitsWavingHomepage = () => {
               ) : (
                 /* Login Button */
                 <Link href="/login" className="px-5 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition font-medium">
-                  Login
+                  {t.nav.login}
                 </Link>
               )}
             </div>

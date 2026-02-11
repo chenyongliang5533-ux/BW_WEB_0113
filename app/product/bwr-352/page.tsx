@@ -20,8 +20,8 @@ const BWR352ProductPage = () => {
   const features = [
     {
       icon: <Wifi className="w-6 h-6" />,
-      title: "5G & 4G LTE Connectivity",
-      description: "Cat 6 mobile module with download speeds up to 300 Mbps and dual SIM failover for uninterrupted connectivity"
+      title: "4G LTE Connectivity",
+      description: "Cat 4 mobile module with download speeds up to 150 Mbps and dual SIM failover for uninterrupted connectivity"
     },
     {
       icon: <Shield className="w-6 h-6" />,
@@ -164,7 +164,7 @@ const BWR352ProductPage = () => {
         <div className="text-sm text-gray-500 mb-6">
           <Link href="/" className="hover:text-blue-600">Home</Link>
           <span className="mx-2">/</span>
-          <span className="text-gray-900">BWR-352</span>
+          <span className="text-gray-900">BWR_352</span>
         </div>
 
         {/* Product Header */}
@@ -195,9 +195,9 @@ const BWR352ProductPage = () => {
 
           {/* Product Info */}
           <div>
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">BWR-352</h1>
+            <h1 className="text-4xl font-bold text-gray-900 mb-4">BWR_352</h1>
             <p className="text-xl text-gray-600 mb-6">
-              Industrial 5G/4G LTE Router with Dual SIM Failover
+              Industrial 4G LTE Router with Dual SIM Failover
             </p>
             
             <div className="bg-blue-50 rounded-3xl p-6 mb-6">
