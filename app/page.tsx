@@ -196,8 +196,8 @@ const BitsWavingHomepage = () => {
               <a href="#" className="block text-gray-700">About Us</a>
               <div className="flex items-center space-x-2 py-2">
                 <Globe className="w-4 h-4" />
-                <button onClick={() => setLanguage(language === 'EN' ? 'ES' : 'EN')}>
-                  {language}|{language === 'EN' ? 'ES' : 'EN'}
+                <button onClick={() => setLanguage(language === 'en' ? 'es' : 'en')}>
+                  {language.toUpperCase()}|{language === 'en' ? 'ES' : 'EN'}
                 </button>
               </div>
               <button className="w-full px-4 py-2 bg-black text-white rounded-lg">
