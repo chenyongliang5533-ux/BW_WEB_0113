@@ -49,16 +49,24 @@ export default function Model3DViewer() {
       containerRef.current!.appendChild(renderer.domElement);
 
       // Lighting
-      const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+      const ambientLight = new THREE.AmbientLight(0xffffff, 1.8);
       scene.add(ambientLight);
 
-      const directionalLight1 = new THREE.DirectionalLight(0xffffff, 0.8);
+      const directionalLight1 = new THREE.DirectionalLight(0xffffff, 1.5);
       directionalLight1.position.set(5, 5, 5);
       scene.add(directionalLight1);
 
-      const directionalLight2 = new THREE.DirectionalLight(0xffffff, 0.4);
+      const directionalLight2 = new THREE.DirectionalLight(0xffffff, 1.5);
       directionalLight2.position.set(-5, -5, -5);
       scene.add(directionalLight2);
+	  
+	  const topLight = new THREE.DirectionalLight(0xffffff, 1.5);
+	  topLight.position.set(0, 10, 0);
+	  scene.add(topLight);
+	  
+	  const hemiLight = new THREE.HemisphereLight(0xffffff, 0x444444, 1.2);
+	  scene.add(hemiLight);
+
 
       let model: any = null;
 
