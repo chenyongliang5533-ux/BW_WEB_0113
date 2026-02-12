@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { Menu, X, ChevronDown, Globe, Wifi, Shield, Zap, Settings, CheckCircle } from 'lucide-react';
+import Model3DViewer from '@/components/Model3DViewer';
 
 const BWR352ProductPage = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -169,30 +170,10 @@ const BWR352ProductPage = () => {
 
         {/* Product Header */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
-          {/* Product Images */}
-          <div>
-            <div className="bg-gray-50 rounded-3xl p-8 mb-4">
-              <img 
-                src={productImages[selectedImage]} 
-                alt="BWR-352 Router"
-                className="w-full h-96 object-contain"
-              />
-            </div>
-            <div className="flex gap-3">
-              {productImages.map((img, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => setSelectedImage(idx)}
-                  className={`flex-1 bg-gray-50 rounded-xl p-3 hover:bg-gray-100 transition ${
-                    selectedImage === idx ? 'ring-2 ring-blue-500' : ''
-                  }`}
-                >
-                  <img src={img} alt={`View ${idx + 1}`} className="w-full h-20 object-contain" />
-                </button>
-              ))}
-            </div>
-          </div>
-
+		{/* Product 3D Viewer */}
+			<div>
+			<Model3DViewer />
+			</div>
           {/* Product Info */}
           <div>
             <h1 className="text-4xl font-bold text-gray-900 mb-4">BWR_352</h1>
