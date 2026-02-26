@@ -36,44 +36,77 @@ const AboutUsPage = () => {
     }
   ];
 
-  const milestones = [
+  const team = [
     {
-      year: "2020",
-      title: "Company Founded",
-      description: "Bitswaving established with a vision to revolutionize industrial connectivity"
+      name: "Leon",
+      role: "Founder & Product Manager",
+      avatar: "/images/leon.jpg",
+      description: "Visionary leader with deep IoT industry expertise"
     },
     {
-      year: "2022",
-      title: "BWR Series Launch",
-      description: "Released our flagship BWR industrial router series with 5G/4G capabilities"
+      name: "Peter",
+      role: "R&D Manager & CTO",
+      avatar: "/images/peter.jpg",
+      description: "Technical architect driving innovation"
     },
     {
-      year: "2023",
-      title: "BW Cloud Platform",
-      description: "Launched cloud management platform for centralized device monitoring"
+      name: "Jeremy",
+      role: "Embedded Software Engineer",
+      avatar: "/images/jeremy.jpg",
+      description: "Expert in embedded systems development"
     },
     {
-      year: "2024",
-      title: "Global Expansion",
-      description: "Expanded operations to serve customers across 30+ countries"
+      name: "Wendy",
+      role: "Hardware R&D Engineer",
+      avatar: "/images/wendy.jpg",
+      description: "Specialized in industrial hardware design"
     },
     {
-      year: "2025",
-      title: "10,000+ Deployments",
-      description: "Reached milestone of 10,000+ active device deployments worldwide"
+      name: "Jack",
+      role: "Platform R&D Engineer",
+      avatar: "/images/jack.jpg",
+      description: "Cloud platform and backend specialist"
     },
+    {
+      name: "Mack",
+      role: "Sales Manager",
+      avatar: "/images/mack.jpg",
+      description: "Leading global sales strategy"
+    },
+    {
+      name: "Alvin",
+      role: "Sales Representative",
+      avatar: "/images/alvin.jpg",
+      description: "Building strong customer relationships"
+    }
+  ];
+
+  const roadmap = [
     {
       year: "2026",
-      title: "Industry Recognition",
-      description: "Awarded Best Industrial IoT Solution by leading industry associations"
+      title: "Smart Gateway Launch",
+      description: "Launch industrial IoT 4G/5G smart gateways based on MTK7628 and MTK7981",
+      status: "current"
+    },
+    {
+      year: "2027",
+      title: "Edge Computing & LoRaWAN",
+      description: "Launch industrial-grade edge computing device product lines and LoRaWAN product lines based on RK3568",
+      status: "planned"
+    },
+    {
+      year: "2028",
+      title: "Intelligent RTU",
+      description: "Launch intelligent industrial-grade RTU product lines",
+      status: "planned"
     }
   ];
 
   const stats = [
-    { number: "10,000+", label: "Active Deployments" },
-    { number: "30+", label: "Countries Served" },
-    { number: "99.9%", label: "Average Uptime" },
-    { number: "500+", label: "Enterprise Customers" }
+    { number: "2026", label: "Founded" },
+    { number: "10+", label: "Years Experience" },
+    { number: "7", label: "Team Members" },
+    { number: "3+", label: "Product Lines" }
   ];
 
   return (
@@ -108,7 +141,7 @@ const AboutUsPage = () => {
                     <div className="bg-white border border-gray-200 rounded-lg shadow-lg">
                       <Link href="/product/bwr-352" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-t-lg">BWR-352</Link>
                       <Link href="/product/bw-cloud" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600">BW Cloud</Link>
-                      <a href="#" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-b-lg">Accessories</a>
+                      <Link href="/product/accessories" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-b-lg">Accessories</Link>
                     </div>
                   </div>
                 )}
@@ -222,7 +255,7 @@ const AboutUsPage = () => {
               About Bitswaving
             </h1>
             <p className="text-xl text-gray-700 leading-relaxed">
-              We're on a mission to connect the industrial world with reliable, intelligent, and secure networking solutions that power Industry 4.0 transformation.
+              A startup IoT company focused on providing secure, stable, and maintainable IoT terminal devices and cloud services for Industry 4.0 transformation.
             </p>
           </div>
         </div>
@@ -235,21 +268,21 @@ const AboutUsPage = () => {
             <h2 className="text-3xl font-bold text-gray-900 mb-6">Who We Are</h2>
             <div className="space-y-4 text-gray-700 leading-relaxed">
               <p>
-                Bitswaving is a leading provider of industrial-grade networking equipment and cloud management solutions. Founded in 2020, we've rapidly grown to serve over 500 enterprise customers across 30+ countries.
+                Bitswaving is a startup IoT company founded in <strong>February 2026</strong>. Our team brings over <strong>10 years of experience</strong> implementing IoT projects across various industries.
               </p>
               <p>
-                Our focus is simple: deliver connectivity solutions that just work. Whether it's a manufacturing plant, retail network, smart city infrastructure, or remote worksite, our products are designed to provide reliable, secure connectivity in the most demanding environments.
+                We focus on providing <strong>secure, stable, and maintainable</strong> IoT terminal devices and cloud services. Our mission is to simplify industrial connectivity while delivering enterprise-grade reliability.
               </p>
               <p>
-                We combine cutting-edge hardware engineering with intelligent cloud software to create a complete ecosystem that makes network management effortless. From initial deployment to ongoing operations, we're with you every step of the way.
+                From initial deployment to ongoing operations, we're with you every step of the way, combining cutting-edge hardware engineering with intelligent cloud software to create a complete IoT ecosystem.
               </p>
             </div>
           </div>
           <div className="rounded-3xl overflow-hidden">
             <img 
-              src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80"
+              src="/images/about-us.png"
               alt="About Bitswaving"
-              className="w-full h-full object-cover"
+              className="w-190 h-120 object-cover"
             />
           </div>
         </div>
@@ -262,6 +295,31 @@ const AboutUsPage = () => {
               <div className="text-gray-700 font-medium">{stat.label}</div>
             </div>
           ))}
+        </div>
+
+        {/* Team Section */}
+        <div className="mb-16">
+          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Our Team</h2>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            {team.map((member, idx) => (
+              <div key={idx} className="text-center">
+                <div className="mb-4">
+                  <img 
+                    src={member.avatar} 
+                    alt={member.name}
+                    className="w-32 h-32 rounded-full mx-auto object-cover border-4 border-gray-200"
+                    onError={(e) => {
+                      // Fallback to placeholder if image fails to load
+                      e.currentTarget.src = `https://ui-avatars.com/api/?name=${member.name}&size=128&background=3b82f6&color=fff`;
+                    }}
+                  />
+                </div>
+                <h3 className="text-lg font-bold text-gray-900 mb-1">{member.name}</h3>
+                <p className="text-sm text-blue-600 font-medium mb-2">{member.role}</p>
+                <p className="text-xs text-gray-600 leading-relaxed">{member.description}</p>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Core Values */}
@@ -280,24 +338,35 @@ const AboutUsPage = () => {
           </div>
         </div>
 
-        {/* Timeline */}
+        {/* Roadmap */}
         <div className="mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Our Journey</h2>
+          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Product Roadmap</h2>
           <div className="max-w-4xl mx-auto">
             <div className="space-y-8">
-              {milestones.map((milestone, idx) => (
+              {roadmap.map((milestone, idx) => (
                 <div key={idx} className="flex gap-6">
                   <div className="flex flex-col items-center">
-                    <div className="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0">
+                    <div className={`w-20 h-20 rounded-full flex items-center justify-center font-bold text-white flex-shrink-0 ${
+                      milestone.status === 'current' ? 'bg-blue-600' : 'bg-gray-400'
+                    }`}>
                       {milestone.year}
                     </div>
-                    {idx < milestones.length - 1 && (
+                    {idx < roadmap.length - 1 && (
                       <div className="w-0.5 h-full bg-blue-200 mt-2"></div>
                     )}
                   </div>
                   <div className="pb-8 flex-1">
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">{milestone.title}</h3>
-                    <p className="text-gray-600 leading-relaxed">{milestone.description}</p>
+                    <div className={`rounded-2xl p-6 ${
+                      milestone.status === 'current' ? 'bg-blue-50 border-2 border-blue-600' : 'bg-gray-50 border border-gray-200'
+                    }`}>
+                      {milestone.status === 'current' && (
+                        <span className="inline-block px-3 py-1 bg-blue-600 text-white text-xs font-semibold rounded-full mb-3">
+                          Current Focus
+                        </span>
+                      )}
+                      <h3 className="text-xl font-semibold text-gray-900 mb-2">{milestone.title}</h3>
+                      <p className="text-gray-600 leading-relaxed">{milestone.description}</p>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -306,14 +375,14 @@ const AboutUsPage = () => {
         </div>
 
         {/* Mission & Vision */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-3xl p-8 border border-gray-200">
             <div className="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center mb-4">
               <Target className="w-6 h-6 text-white" />
             </div>
             <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Mission</h3>
             <p className="text-gray-700 leading-relaxed">
-              To empower businesses with industrial-grade connectivity solutions that are reliable, secure, and easy to manage—enabling digital transformation across all industries.
+              To empower businesses with secure, stable, and maintainable IoT solutions that are reliable and easy to manage—enabling digital transformation across all industries.
             </p>
           </div>
           <div className="bg-gradient-to-br from-pink-50 to-purple-50 rounded-3xl p-8 border border-gray-200">
@@ -322,30 +391,8 @@ const AboutUsPage = () => {
             </div>
             <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Vision</h3>
             <p className="text-gray-700 leading-relaxed">
-              To be the global leader in industrial IoT connectivity, recognized for innovation, reliability, and customer success—connecting millions of devices worldwide.
+              To be a trusted leader in industrial IoT connectivity, recognized for innovation, reliability, and customer success—connecting millions of devices worldwide.
             </p>
-          </div>
-        </div>
-
-        {/* CTA */}
-        <div className="bg-gray-900 text-white rounded-3xl p-12 text-center">
-          <h2 className="text-3xl font-bold mb-4">Join Our Journey</h2>
-          <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-            Whether you're looking for reliable connectivity solutions or want to partner with us, we'd love to hear from you.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link 
-              href="/orders"
-              className="px-8 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition font-semibold"
-            >
-              Get Started
-            </Link>
-            <Link 
-              href="/support"
-              className="px-8 py-3 border-2 border-white text-white rounded-xl hover:bg-white hover:text-gray-900 transition font-semibold"
-            >
-              Contact Us
-            </Link>
           </div>
         </div>
       </div>
