@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { Menu, X, ChevronDown, Globe, User, LogOut, Package, Factory, Store, Building2, Truck, ArrowRight } from 'lucide-react';
+import { Menu, X, ChevronDown, Globe, User, LogOut, Package, Wifi, Shield, Sun, Droplets, Radio, ExternalLink, ArrowRight } from 'lucide-react';
 import { useSession, signOut } from 'next-auth/react';
 
 const UseCasesPage = () => {
@@ -16,105 +16,105 @@ const UseCasesPage = () => {
   const useCases = [
     {
       id: 1,
-      title: "Smart Manufacturing Excellence",
-      company: "Automotive Parts Manufacturer",
-      industry: "Manufacturing",
-      icon: <Factory className="w-8 h-8" />,
-      image: "https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=800&q=80",
-      challenge: "A leading automotive parts manufacturer needed reliable connectivity across 50+ production lines in 3 factories. Frequent network downtime was causing production delays and quality issues.",
-      solution: "Deployed 150 BWR-352 routers with dual SIM failover and BW Cloud management platform for centralized monitoring and rapid troubleshooting.",
-      results: [
-        "99.9% network uptime achieved",
-        "Zero production delays due to connectivity",
-        "Remote configuration saved 200+ hours annually",
-        "$500K+ in prevented downtime costs"
+      title: "MODBUS RTU to MQTT",
+      tag: "Industrial IoT",
+      icon: <Wifi className="w-8 h-8" />,
+      image: "/images/case/case1.png",
+      summary: "Use BWR_352 to actively poll a MODBUS RTU water meter and periodically report data to BW_CLOUD via MQTT — enabling real-time water usage monitoring without manual readings.",
+      highlights: [
+        "Active MODBUS RTU polling via BWR_352",
+        "Timed MQTT reporting to BW_CLOUD",
+        "Real-time water consumption monitoring",
+        "Fully automated, zero manual intervention"
       ],
-      bgColor: "bg-blue-50"
+      bgColor: "bg-blue-50",
+      accentColor: "text-blue-600",
+      notionUrl: "https://notion.so/YOUR_LINK_1"  // ← Replace with your Notion link
     },
     {
       id: 2,
-      title: "Retail Network Transformation",
-      company: "National Retail Chain",
-      industry: "Retail",
-      icon: <Store className="w-8 h-8" />,
-      image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&q=80",
-      challenge: "A retail chain with 300+ stores struggled with inconsistent POS connectivity, slow payment processing, and difficulty managing network equipment across locations.",
-      solution: "Implemented BWR-352 routers at all locations with BW Cloud for centralized management. Enabled automatic failover between primary fiber and 4G LTE backup.",
-      results: [
-        "Payment processing time reduced by 60%",
-        "Zero checkout disruptions during peak hours",
-        "Simplified IT management across all stores",
-        "Enhanced customer satisfaction scores"
+      title: "OpenVPN: SCADA & Remote PLC",
+      tag: "Remote Access",
+      icon: <Shield className="w-8 h-8" />,
+      image: "/images/case/case2.png",
+      summary: "BWR_352 establishes an OpenVPN tunnel between a SCADA server and the router's LAN — giving SCADA secure, remote access to PLCs for data acquisition and control over the internet.",
+      highlights: [
+        "OpenVPN tunnel between SCADA and BWR_352",
+        "Remote access to LAN-side PLCs",
+        "Supports data collection and control commands",
+        "Secure encrypted communication"
       ],
-      bgColor: "bg-cyan-50"
+      bgColor: "bg-cyan-50",
+      accentColor: "text-cyan-600",
+      notionUrl: "https://notion.so/YOUR_LINK_2"  // ← Replace with your Notion link
     },
     {
       id: 3,
-      title: "Smart City Infrastructure",
-      company: "Metropolitan Municipality",
-      industry: "Smart City",
-      icon: <Building2 className="w-8 h-8" />,
-      image: "https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=800&q=80",
-      challenge: "City needed to connect 500+ IoT devices for traffic management, environmental monitoring, and public safety systems across a large metropolitan area.",
-      solution: "Deployed BWR-352 routers with industrial-grade reliability for outdoor installations. BW Cloud enabled real-time monitoring and automated alerts for all connected systems.",
-      results: [
-        "500+ connected devices operating reliably",
-        "Real-time traffic flow optimization",
-        "30% reduction in response time for incidents",
-        "Scalable infrastructure for future expansion"
+      title: "CBRS Band 48 for Smart IP Cameras",
+      tag: "Private LTE",
+      icon: <Radio className="w-8 h-8" />,
+      image: "/images/case/case3.png",
+      summary: "In the US, BWR_352 with a CBRS-capable 4G module connects to your own private base station on the free Band 48 spectrum — ideal for campus-wide smart surveillance without carrier fees.",
+      highlights: [
+        "CBRS Band 48 (3.5 GHz) free spectrum",
+        "Private LTE network on your own base station",
+        "Campus-wide IP camera coverage",
+        "No carrier subscription required"
       ],
-      bgColor: "bg-pink-50"
+      bgColor: "bg-violet-50",
+      accentColor: "text-violet-600",
+      notionUrl: "https://notion.so/YOUR_LINK_3"  // ← Replace with your Notion link
     },
     {
       id: 4,
-      title: "Remote Site Connectivity",
-      company: "Construction & Mining Corp",
-      industry: "Construction",
-      icon: <Truck className="w-8 h-8" />,
-      image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80",
-      challenge: "Construction sites in remote locations needed reliable internet for equipment monitoring, project management, and worker safety systems without access to wired infrastructure.",
-      solution: "Installed BWR-352 routers with 5G connectivity and industrial temperature range capability. Remote management through BW Cloud eliminated need for on-site IT staff.",
-      results: [
-        "Reliable connectivity in extreme conditions",
-        "Real-time equipment tracking and monitoring",
-        "Improved worker safety with connected systems",
-        "Reduced site visits by 80% through remote management"
+      title: "Security First: ATM & IPsec VPN",
+      tag: "Finance / Security",
+      icon: <Shield className="w-8 h-8" />,
+      image: "/images/case/case4.png",
+      summary: "BWR_352 provides network connectivity to ATMs and establishes an IPsec VPN tunnel back to the bank's internal systems — ensuring every transaction travels over an encrypted, authenticated channel.",
+      highlights: [
+        "IPsec VPN to bank's internal network",
+        "Encrypted ATM communications",
+        "Dual-SIM failover for always-on uptime",
+        "Meets financial-grade security standards"
       ],
-      bgColor: "bg-gray-50"
+      bgColor: "bg-gray-50",
+      accentColor: "text-gray-700",
+      notionUrl: "https://notion.so/YOUR_LINK_4"  // ← Replace with your Notion link
     },
     {
       id: 5,
-      title: "Healthcare Network Reliability",
-      company: "Regional Healthcare Network",
-      industry: "Healthcare",
-      icon: <Building2 className="w-8 h-8" />,
-      image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=800&q=80",
-      challenge: "Healthcare network with 12 clinics required 24/7 reliable connectivity for patient records, telemedicine, and critical health monitoring systems.",
-      solution: "Deployed BWR-352 routers with automatic LTE failover and VPN security. BW Cloud provided centralized visibility and instant notifications for any connectivity issues.",
-      results: [
-        "Zero downtime for critical health systems",
-        "HIPAA-compliant secure connectivity",
-        "Seamless telemedicine consultations",
-        "Centralized monitoring across all locations"
+      title: "Smart Solar Panel Control System",
+      tag: "Renewable Energy",
+      icon: <Sun className="w-8 h-8" />,
+      image: "/images/case/case5.png",
+      summary: "BWR_352 provides reliable connectivity for solar panel control systems — enabling remote efficiency monitoring, real-time performance data, and remote adjustment of panel angles for optimal yield.",
+      highlights: [
+        "Remote solar panel performance monitoring",
+        "Real-time efficiency and output data",
+        "Remote panel angle adjustment",
+        "Connectivity for off-grid installations"
       ],
-      bgColor: "bg-blue-50"
+      bgColor: "bg-amber-50",
+      accentColor: "text-amber-600",
+      notionUrl: "https://notion.so/YOUR_LINK_5"  // ← Replace with your Notion link
     },
     {
       id: 6,
-      title: "Agricultural IoT Innovation",
-      company: "Smart Farming Solutions",
-      industry: "Agriculture",
-      icon: <Factory className="w-8 h-8" />,
-      image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800&q=80",
-      challenge: "Large-scale farm operations needed connectivity for soil sensors, irrigation systems, and automated equipment across thousands of acres with no cellular coverage.",
-      solution: "Implemented BWR-352 routers with long-range antennas and solar power systems. Created mesh network covering entire farm with centralized BW Cloud management.",
-      results: [
-        "Real-time monitoring of 1000+ acres",
-        "40% water usage reduction through smart irrigation",
-        "Increased crop yield by 25%",
-        "Automated decision-making based on sensor data"
+      title: "Smart Water Management: BWR_352 & RTU",
+      tag: "Water / Utilities",
+      icon: <Droplets className="w-8 h-8" />,
+      image: "/images/case/case6.png",
+      summary: "BWR_352's DI/DO ports directly control sluice gates and read field status, while simultaneously providing network connectivity for RTU devices — all in one compact industrial router.",
+      highlights: [
+        "DI ports for gate status monitoring",
+        "DO ports for sluice gate control",
+        "Cellular uplink for RTU connectivity",
+        "Centralized management via BW_CLOUD"
       ],
-      bgColor: "bg-cyan-50"
+      bgColor: "bg-teal-50",
+      accentColor: "text-teal-600",
+      notionUrl: "https://notion.so/YOUR_LINK_6"  // ← Replace with your Notion link
     }
   ];
 
@@ -134,23 +134,23 @@ const UseCasesPage = () => {
             </Link>
 
             <div className="hidden md:flex items-center space-x-2">
-              <Link href="/" className="font-semibold text-gray-700 hover:bg-gray-100 px-3 py-2 rounded-lg transition">Home</Link>
+              <Link href="/" className="text-gray-700 hover:bg-gray-100 px-3 py-2 rounded-lg transition">Home</Link>
               
               <div 
                 className="relative"
                 onMouseEnter={() => setProductDropdown(true)}
                 onMouseLeave={() => setProductDropdown(false)}
               >
-                <button className="flex items-center space-x-1 font-semibold text-gray-700 hover:bg-gray-100 px-3 py-2 rounded-lg transition">
+                <button className="flex items-center space-x-1 text-gray-700 hover:bg-gray-100 px-3 py-2 rounded-lg transition">
                   <span>Product</span>
                   <ChevronDown className="w-4 h-4" />
                 </button>
                 {productDropdown && (
                   <div className="absolute top-full left-0 pt-2 w-48">
                     <div className="bg-white border border-gray-200 rounded-lg shadow-lg">
-                      <Link href="/product/bwr-352" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-t-lg">BWR-352</Link>
-                      <Link href="/product/bw-cloud" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600">BW Cloud</Link>
-                      <a href="#" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-b-lg">Accessories</a>
+                      <Link href="/product/bwr-352" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-t-lg">BWR_352</Link>
+                      <Link href="/product/bw-cloud" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600">BW_Cloud</Link>
+                      <Link href="/product/accessories" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-b-lg">Accessories</Link>
                     </div>
                   </div>
                 )}
@@ -161,7 +161,7 @@ const UseCasesPage = () => {
                 onMouseEnter={() => setSupportDropdown(true)}
                 onMouseLeave={() => setSupportDropdown(false)}
               >
-                <button className="flex items-center space-x-1 font-semibold text-gray-700 hover:bg-gray-100 px-3 py-2 rounded-lg transition">
+                <button className="flex items-center space-x-1 text-gray-700 hover:bg-gray-100 px-3 py-2 rounded-lg transition">
                   <span>Support</span>
                   <ChevronDown className="w-4 h-4" />
                 </button>
@@ -178,19 +178,19 @@ const UseCasesPage = () => {
                 )}
               </div>
 
-              <Link href="/use-cases" className="font-semibold text-blue-600 bg-blue-50 px-3 py-2 rounded-lg">Use Cases</Link>
-              <Link href="#" className="font-semibold text-gray-700 hover:bg-gray-100 px-3 py-2 rounded-lg transition">About Us</Link>
+              <Link href="/use-cases" className="text-blue-600 bg-blue-50 px-3 py-2 rounded-lg">Use Cases</Link>
+              <Link href="#" className="text-gray-700 hover:bg-gray-100 px-3 py-2 rounded-lg transition">About Us</Link>
             </div>
 
             <div className="hidden md:flex items-center space-x-4">
-              <button 
+              <button
                 onClick={() => setLanguage(language === 'EN' ? 'ES' : 'EN')}
                 className="flex items-center space-x-1 font-semibold text-gray-700 hover:bg-gray-100 px-3 py-2 rounded-lg transition"
               >
                 <Globe className="w-4 h-4" />
                 <span>{language}|{language === 'EN' ? 'ES' : 'EN'}</span>
               </button>
-              
+
               {session ? (
                 <div 
                   className="relative"
@@ -257,111 +257,78 @@ const UseCasesPage = () => {
       </nav>
 
       {/* Hero Section */}
-      <div className="bg-blue-100 mx-4 sm:mx-6 lg:mx-8 mt-8 rounded-3xl">
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-20 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-800">
-            Customer Success Stories
-          </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Discover how leading organizations across industries rely on Bitswaving solutions for mission-critical connectivity
-          </p>
+      <div className="mt-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+					  <div className="bg-blue-100 rounded-3xl py-16 text-center">
+						  <h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-800">
+              Use Cases
+            </h1>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Real-world deployment scenarios — from industrial protocol bridging to private LTE networks. Click any card to read the full guide on Notion.
+            </p>
+          </div>
         </div>
       </div>
-
       {/* Use Cases Grid */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {useCases.map((useCase) => (
-            <div 
+            <a 
               key={useCase.id}
-              className={`${useCase.bgColor} rounded-3xl overflow-hidden border border-gray-200 hover:shadow-lg transition-shadow`}
+              href={useCase.notionUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`${useCase.bgColor} rounded-3xl overflow-hidden border border-gray-200 hover:shadow-xl transition-all hover:-translate-y-1 block group`}
             >
               {/* Image */}
-              <div className="h-48 overflow-hidden">
+              <div className="h-48 overflow-hidden relative">
                 <img 
                   src={useCase.image} 
                   alt={useCase.title}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
               </div>
 
               {/* Content */}
               <div className="p-8">
-                {/* Icon & Industry */}
+                {/* Icon & Tag */}
                 <div className="flex items-center justify-between mb-4">
-                  <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-blue-600 shadow-sm">
+                  <div className={`w-12 h-12 bg-white rounded-xl flex items-center justify-center ${useCase.accentColor} shadow-sm`}>
                     {useCase.icon}
                   </div>
                   <span className="px-3 py-1 bg-white text-gray-700 text-sm font-medium rounded-full border border-gray-200">
-                    {useCase.industry}
+                    {useCase.tag}
                   </span>
                 </div>
 
-                {/* Title & Company */}
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                {/* Title */}
+                <h3 className="text-2xl font-bold text-gray-900 mb-3">
                   {useCase.title}
                 </h3>
-                <p className="text-gray-600 font-medium mb-6">
-                  {useCase.company}
+
+                {/* Summary */}
+                <p className="text-gray-700 leading-relaxed mb-6">
+                  {useCase.summary}
                 </p>
 
-                {/* Challenge */}
-                <div className="mb-6">
-                  <h4 className="text-sm font-semibold text-gray-900 mb-2">Challenge</h4>
-                  <p className="text-gray-700 leading-relaxed">
-                    {useCase.challenge}
-                  </p>
-                </div>
+                {/* Highlights */}
+                <ul className="space-y-2 mb-6">
+                  {useCase.highlights.map((item, idx) => (
+                    <li key={idx} className="flex items-start space-x-2">
+                      <ArrowRight className={`w-5 h-5 mt-0.5 flex-shrink-0 ${useCase.accentColor}`} />
+                      <span className="text-gray-700 text-sm">{item}</span>
+                    </li>
+                  ))}
+                </ul>
 
-                {/* Solution */}
-                <div className="mb-6">
-                  <h4 className="text-sm font-semibold text-gray-900 mb-2">Solution</h4>
-                  <p className="text-gray-700 leading-relaxed">
-                    {useCase.solution}
-                  </p>
-                </div>
-
-                {/* Results */}
-                <div>
-                  <h4 className="text-sm font-semibold text-gray-900 mb-3">Results</h4>
-                  <ul className="space-y-2">
-                    {useCase.results.map((result, idx) => (
-                      <li key={idx} className="flex items-start space-x-2">
-                        <ArrowRight className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
-                        <span className="text-gray-700">{result}</span>
-                      </li>
-                    ))}
-                  </ul>
+                {/* Read More */}
+                <div className={`flex items-center space-x-2 font-semibold text-sm ${useCase.accentColor}`}>
+                  <span>Read full guide on Notion</span>
+                  <ExternalLink className="w-4 h-4" />
                 </div>
               </div>
-            </div>
+            </a>
           ))}
-        </div>
-      </div>
-
-      {/* CTA Section */}
-      <div className="bg-gray-900 text-white mx-4 sm:mx-6 lg:mx-8 mb-8 rounded-3xl">
-        <div className="max-w-4xl mx-auto px-6 sm:px-8 lg:px-12 py-16 text-center">
-          <h2 className="text-3xl font-bold mb-4">
-            Ready to Transform Your Connectivity?
-          </h2>
-          <p className="text-xl text-gray-300 mb-8">
-            Join hundreds of organizations already using Bitswaving solutions
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link 
-              href="/orders"
-              className="px-8 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition font-semibold"
-            >
-              Request a Quote
-            </Link>
-            <Link 
-              href="/support"
-              className="px-8 py-3 border-2 border-white text-white rounded-xl hover:bg-white hover:text-gray-900 transition font-semibold"
-            >
-              Download Resources
-            </Link>
-          </div>
         </div>
       </div>
 
