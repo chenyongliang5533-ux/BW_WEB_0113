@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Menu, X, ChevronDown, Globe, User, LogOut, Package, Download, FileText, BookOpen, Cpu, Shield } from 'lucide-react';
+import { Menu, X, ChevronDown, Globe, User, LogOut, Package, Download, FileText, BookOpen, Cpu, Shield, Mail, MessageCircle, Copy, Check } from 'lucide-react';
 import { useSession, signOut } from 'next-auth/react';
 
 interface SupportFile {
@@ -24,6 +24,7 @@ const SupportCenterPage = () => {
   const [loading, setLoading] = useState(true);
   const [files, setFiles] = useState<SupportFile[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [copiedField, setCopiedField] = useState<string | null>(null);
 
   const categories = [
     { id: 'all', name: 'All Files', icon: <FileText className="w-5 h-5" /> },
@@ -66,6 +67,16 @@ const SupportCenterPage = () => {
 
   const handleDownload = async (file: SupportFile) => {
     window.open(file.url, '_blank');
+  };
+
+  const handleCopy = async (text: string, field: string) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopiedField(field);
+      setTimeout(() => setCopiedField(null), 2000);
+    } catch (err) {
+      console.error('Failed to copy:', err);
+    }
   };
 
   return (
@@ -214,6 +225,106 @@ const SupportCenterPage = () => {
           <p className="text-xl text-gray-600">
             Download product documentation, firmware, and certificates
           </p>
+        </div>
+
+        {/* Contact Card */}
+        <div className="max-w-4xl mx-auto mb-12">
+          <div className="bg-gradient-to-br from-blue-50 to-white border border-gray-200 rounded-3xl p-8 shadow-sm">
+            <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
+              {/* Photo */}
+              <div className="flex-shrink-0">
+                <img
+                  src="/images/leon.jpg"
+                  alt="Leon"
+                  className="w-28 h-28 rounded-full object-cover border-4 border-white shadow-md"
+                />
+              </div>
+
+              {/* Content */}
+              <div className="flex-1 w-full">
+                <h2 className="text-2xl font-bold text-gray-900 mb-2 text-center md:text-left">
+                  Hello, I'm Leon
+                </h2>
+                <p className="text-gray-600 mb-6 text-center md:text-left">
+                  I'm the person in charge at Bitswaving. Feel free to reach out — I'm here to help.
+                </p>
+
+                <div className="space-y-3">
+                  {/* Email */}
+                  <div className="flex items-center justify-between bg-white border border-gray-200 rounded-xl px-4 py-3">
+                    <div className="flex items-center space-x-3 min-w-0">
+                      <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <Mail className="w-5 h-5 text-blue-600" />
+                      </div>
+                      <div className="min-w-0">
+                        <div className="text-xs text-gray-500">For non-urgent support</div>
+                        <a
+                          href="mailto:leon@bitswaving.com"
+                          className="text-gray-900 font-medium hover:text-blue-600 transition truncate block"
+                        >
+                          leon@bitswaving.com
+                        </a>
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => handleCopy('leon@bitswaving.com', 'email')}
+                      className="flex-shrink-0 ml-3 flex items-center space-x-1 px-3 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition text-sm font-medium"
+                      title="Copy email"
+                    >
+                      {copiedField === 'email' ? (
+                        <>
+                          <Check className="w-4 h-4 text-green-600" />
+                          <span className="text-green-600">Copied</span>
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="w-4 h-4" />
+                          <span>Copy</span>
+                        </>
+                      )}
+                    </button>
+                  </div>
+
+                  {/* WhatsApp */}
+                  <div className="flex items-center justify-between bg-white border border-gray-200 rounded-xl px-4 py-3">
+                    <div className="flex items-center space-x-3 min-w-0">
+                      <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <MessageCircle className="w-5 h-5 text-green-600" />
+                      </div>
+                      <div className="min-w-0">
+                        <div className="text-xs text-gray-500">For urgent support (WhatsApp)</div>
+                        <a
+                          href="https://wa.me/8618060917199"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-gray-900 font-medium hover:text-green-600 transition truncate block"
+                        >
+                          +86 180 6091 7199
+                        </a>
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => handleCopy('+8618060917199', 'phone')}
+                      className="flex-shrink-0 ml-3 flex items-center space-x-1 px-3 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition text-sm font-medium"
+                      title="Copy phone number"
+                    >
+                      {copiedField === 'phone' ? (
+                        <>
+                          <Check className="w-4 h-4 text-green-600" />
+                          <span className="text-green-600">Copied</span>
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="w-4 h-4" />
+                          <span>Copy</span>
+                        </>
+                      )}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Category Filter */}
