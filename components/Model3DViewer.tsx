@@ -94,7 +94,9 @@ export default function Model3DViewer() {
         // Drag-to-rotate interaction
         let isDragging = false;
         let previousPos = { x: 0, y: 0 };
-        const rotation = { x: 0, y: 0 };
+        // Initial rotation: mostly top-down view with a gentle ~30° forward tilt
+        // -Math.PI / 3 ≈ 60° from front (i.e., 30° down from pure top-view)
+        const rotation = { x: -Math.PI / 3, y: 0 };
 
         const onPointerDown = (e: PointerEvent) => {
           isDragging = true;
@@ -122,9 +124,14 @@ export default function Model3DViewer() {
 
         // Animation loop (with cancellation)
         let animationId: number;
+        const autoRotateSpeed = 0.003; // radians per frame (~0.17°/frame ≈ 10°/sec at 60fps)
         const animate = () => {
           animationId = requestAnimationFrame(animate);
           if (model) {
+            // Auto-rotate around Y axis when user isn't dragging
+            if (!isDragging) {
+              rotation.y += autoRotateSpeed;
+            }
             model.rotation.x = rotation.x;
             model.rotation.y = rotation.y;
           }
