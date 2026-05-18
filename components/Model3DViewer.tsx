@@ -1,6 +1,4 @@
-// For your actual project, create a separate component for the 3D viewer
 // components/Model3DViewer.tsx
-
 "use client";
 
 import { useEffect, useRef } from 'react';
@@ -11,155 +9,177 @@ export default function Model3DViewer() {
   useEffect(() => {
     if (!containerRef.current) return;
 
-    // Dynamically load Three.js and GLTFLoader
-    const script1 = document.createElement('script');
-    script1.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
-    script1.async = true;
+    let cleanup: (() => void) | null = null;
+    let cancelled = false;
 
-    const script2 = document.createElement('script');
-    script2.src = 'https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js';
-    script2.async = true;
+    // Dynamically import three.js and loaders as ES modules
+    // (using a recent version that supports Meshopt natively)
+    (async () => {
+      try {
+        const THREE = await import('three');
+        const { GLTFLoader } = await import('three/examples/jsm/loaders/GLTFLoader.js');
+        const { DRACOLoader } = await import('three/examples/jsm/loaders/DRACOLoader.js');
+        const { MeshoptDecoder } = await import('three/examples/jsm/libs/meshopt_decoder.module.js');
 
-    script1.onload = () => {
-      document.head.appendChild(script2);
-    };
+        if (cancelled || !containerRef.current) return;
 
-    script2.onload = () => {
-      initScene();
-    };
+        const container = containerRef.current;
 
-    document.head.appendChild(script1);
+        // Scene setup
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0xf9fafb);
 
-    function initScene() {
-      const THREE = (window as any).THREE;
-      const scene = new THREE.Scene();
-      scene.background = new THREE.Color(0xf9fafb);
+        const camera = new THREE.PerspectiveCamera(
+          45,
+          container.clientWidth / container.clientHeight,
+          0.1,
+          1000
+        );
+        camera.position.set(0, 0, 5);
 
-      const camera = new THREE.PerspectiveCamera(
-        45,
-        containerRef.current!.clientWidth / containerRef.current!.clientHeight,
-        0.1,
-        1000
-      );
-      camera.position.set(0, 0, 5);
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(container.clientWidth, container.clientHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        container.appendChild(renderer.domElement);
 
-      const renderer = new THREE.WebGLRenderer({ antialias: true });
-      renderer.setSize(containerRef.current!.clientWidth, containerRef.current!.clientHeight);
-      renderer.setPixelRatio(window.devicePixelRatio);
-      containerRef.current!.appendChild(renderer.domElement);
+        // Lighting
+        scene.add(new THREE.AmbientLight(0xffffff, 1.8));
 
-      // Lighting
-      const ambientLight = new THREE.AmbientLight(0xffffff, 1.8);
-      scene.add(ambientLight);
+        const dirLight1 = new THREE.DirectionalLight(0xffffff, 1.5);
+        dirLight1.position.set(5, 5, 5);
+        scene.add(dirLight1);
 
-      const directionalLight1 = new THREE.DirectionalLight(0xffffff, 1.5);
-      directionalLight1.position.set(5, 5, 5);
-      scene.add(directionalLight1);
+        const dirLight2 = new THREE.DirectionalLight(0xffffff, 1.5);
+        dirLight2.position.set(-5, -5, -5);
+        scene.add(dirLight2);
 
-      const directionalLight2 = new THREE.DirectionalLight(0xffffff, 1.5);
-      directionalLight2.position.set(-5, -5, -5);
-      scene.add(directionalLight2);
-	  
-	  const topLight = new THREE.DirectionalLight(0xffffff, 1.5);
-	  topLight.position.set(0, 10, 0);
-	  scene.add(topLight);
-	  
-	  const hemiLight = new THREE.HemisphereLight(0xffffff, 0x444444, 1.2);
-	  scene.add(hemiLight);
+        const topLight = new THREE.DirectionalLight(0xffffff, 1.5);
+        topLight.position.set(0, 10, 0);
+        scene.add(topLight);
 
+        scene.add(new THREE.HemisphereLight(0xffffff, 0x444444, 1.2));
 
-      let model: any = null;
+        // GLTFLoader with both Draco and Meshopt support
+        const loader = new GLTFLoader();
 
-      // Load GLB model
-      const loader = new (window as any).THREE.GLTFLoader();
-      loader.load(
-        '/models/BWR352.glb',
-        (gltf: any) => {
-          model = gltf.scene;
-          
-          // Center and scale
-          const box = new THREE.Box3().setFromObject(model);
-          const center = box.getCenter(new THREE.Vector3());
-          const size = box.getSize(new THREE.Vector3());
-          
-          const maxDim = Math.max(size.x, size.y, size.z);
-          const scale = 2 / maxDim;
-          model.scale.setScalar(scale);
-          model.position.sub(center.multiplyScalar(scale));
-          
-          scene.add(model);
-        },
-        undefined,
-        (error: any) => {
-          console.error('Error loading model:', error);
-        }
-      );
+        // Draco decoder (loaded from Google's CDN — only fetched if model uses Draco)
+        const dracoLoader = new DRACOLoader();
+        dracoLoader.setDecoderPath('https://www.gstatic.com/draco/v1/decoders/');
+        loader.setDRACOLoader(dracoLoader);
 
-      // Mouse/Touch interaction
-      let isDragging = false;
-      let previousMousePosition = { x: 0, y: 0 };
-      let rotation = { x: 0, y: 0 };
+        // Meshopt decoder (preferred — smaller decoder, native to three.js)
+        loader.setMeshoptDecoder(MeshoptDecoder);
 
-      const onPointerDown = (e: PointerEvent) => {
-        isDragging = true;
-        previousMousePosition = { x: e.clientX, y: e.clientY };
-      };
+        let model: THREE.Object3D | null = null;
 
-      const onPointerMove = (e: PointerEvent) => {
-        if (!isDragging) return;
-        const deltaX = e.clientX - previousMousePosition.x;
-        const deltaY = e.clientY - previousMousePosition.y;
-        rotation.y += deltaX * 0.01;
-        rotation.x += deltaY * 0.01;
-        previousMousePosition = { x: e.clientX, y: e.clientY };
-      };
+        loader.load(
+          '/models/BWR352.glb',
+          (gltf) => {
+            if (cancelled) return;
+            model = gltf.scene;
 
-      const onPointerUp = () => {
-        isDragging = false;
-      };
+            // Center and scale to fit view
+            const box = new THREE.Box3().setFromObject(model);
+            const center = box.getCenter(new THREE.Vector3());
+            const size = box.getSize(new THREE.Vector3());
 
-      renderer.domElement.addEventListener('pointerdown', onPointerDown);
-      renderer.domElement.addEventListener('pointermove', onPointerMove);
-      renderer.domElement.addEventListener('pointerup', onPointerUp);
+            const maxDim = Math.max(size.x, size.y, size.z);
+            const scale = 2 / maxDim;
+            model.scale.setScalar(scale);
+            model.position.sub(center.multiplyScalar(scale));
 
-      // Animation
-      function animate() {
-        requestAnimationFrame(animate);
-        if (model) {
-          model.rotation.x = rotation.x;
-          model.rotation.y = rotation.y;
-        }
-        renderer.render(scene, camera);
+            scene.add(model);
+          },
+          undefined,
+          (error) => {
+            console.error('Error loading model:', error);
+          }
+        );
+
+        // Drag-to-rotate interaction
+        let isDragging = false;
+        let previousPos = { x: 0, y: 0 };
+        const rotation = { x: 0, y: 0 };
+
+        const onPointerDown = (e: PointerEvent) => {
+          isDragging = true;
+          previousPos = { x: e.clientX, y: e.clientY };
+          renderer.domElement.style.cursor = 'grabbing';
+        };
+
+        const onPointerMove = (e: PointerEvent) => {
+          if (!isDragging) return;
+          rotation.y += (e.clientX - previousPos.x) * 0.01;
+          rotation.x += (e.clientY - previousPos.y) * 0.01;
+          previousPos = { x: e.clientX, y: e.clientY };
+        };
+
+        const onPointerUp = () => {
+          isDragging = false;
+          renderer.domElement.style.cursor = 'grab';
+        };
+
+        renderer.domElement.style.cursor = 'grab';
+        renderer.domElement.addEventListener('pointerdown', onPointerDown);
+        renderer.domElement.addEventListener('pointermove', onPointerMove);
+        renderer.domElement.addEventListener('pointerup', onPointerUp);
+        renderer.domElement.addEventListener('pointerleave', onPointerUp);
+
+        // Animation loop (with cancellation)
+        let animationId: number;
+        const animate = () => {
+          animationId = requestAnimationFrame(animate);
+          if (model) {
+            model.rotation.x = rotation.x;
+            model.rotation.y = rotation.y;
+          }
+          renderer.render(scene, camera);
+        };
+        animate();
+
+        // Responsive resize
+        const handleResize = () => {
+          if (!container) return;
+          camera.aspect = container.clientWidth / container.clientHeight;
+          camera.updateProjectionMatrix();
+          renderer.setSize(container.clientWidth, container.clientHeight);
+        };
+        window.addEventListener('resize', handleResize);
+
+        // Cleanup function — runs on unmount
+        cleanup = () => {
+          cancelAnimationFrame(animationId);
+          window.removeEventListener('resize', handleResize);
+          renderer.domElement.removeEventListener('pointerdown', onPointerDown);
+          renderer.domElement.removeEventListener('pointermove', onPointerMove);
+          renderer.domElement.removeEventListener('pointerup', onPointerUp);
+          renderer.domElement.removeEventListener('pointerleave', onPointerUp);
+          dracoLoader.dispose();
+          renderer.dispose();
+          if (container.contains(renderer.domElement)) {
+            container.removeChild(renderer.domElement);
+          }
+        };
+      } catch (err) {
+        console.error('Failed to initialize 3D viewer:', err);
       }
-      animate();
-
-      // Resize
-      const handleResize = () => {
-        if (!containerRef.current) return;
-        camera.aspect = containerRef.current.clientWidth / containerRef.current.clientHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(containerRef.current.clientWidth, containerRef.current.clientHeight);
-      };
-      window.addEventListener('resize', handleResize);
-    }
+    })();
 
     return () => {
-      // Cleanup
-      if (containerRef.current && containerRef.current.firstChild) {
-        containerRef.current.removeChild(containerRef.current.firstChild);
-      }
+      cancelled = true;
+      if (cleanup) cleanup();
     };
   }, []);
 
   return (
-    <div>
-      <div 
+    <div className="w-full h-full">
+      <div
         ref={containerRef}
-        className="bg-gray-50 rounded-3xl overflow-hidden"
-        style={{ height: '500px', cursor: 'grab' }}
+        className="w-full h-full"
+        style={{ minHeight: '600px' }}
       />
-      <p className="text-center text-sm text-gray-500 mt-4">
-        🖱️ Drag to rotate • 📱 Touch & drag on mobile
+      <p className="text-center text-sm text-gray-500 mt-2 absolute bottom-3 left-0 right-0 pointer-events-none">
+        🖱️ Drag to rotate
       </p>
     </div>
   );
