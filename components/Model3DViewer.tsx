@@ -19,7 +19,6 @@ export default function Model3DViewer() {
       try {
         const THREE = await import('three');
         const { GLTFLoader } = await import('three/examples/jsm/loaders/GLTFLoader.js');
-        const { DRACOLoader } = await import('three/examples/jsm/loaders/DRACOLoader.js');
         const { MeshoptDecoder } = await import('three/examples/jsm/libs/meshopt_decoder.module.js');
 
         if (cancelled || !containerRef.current) return;
@@ -60,15 +59,10 @@ export default function Model3DViewer() {
 
         scene.add(new THREE.HemisphereLight(0xffffff, 0x444444, 1.2));
 
-        // GLTFLoader with both Draco and Meshopt support
+        // GLTFLoader with Meshopt support
         const loader = new GLTFLoader();
 
-        // Draco decoder (loaded from Google's CDN — only fetched if model uses Draco)
-        const dracoLoader = new DRACOLoader();
-        dracoLoader.setDecoderPath('https://www.gstatic.com/draco/v1/decoders/');
-        loader.setDRACOLoader(dracoLoader);
-
-        // Meshopt decoder (preferred — smaller decoder, native to three.js)
+        // Meshopt decoder — ships with three.js, no external CDN needed
         loader.setMeshoptDecoder(MeshoptDecoder);
 
         let model: Object3D | null = null;
@@ -155,7 +149,6 @@ export default function Model3DViewer() {
           renderer.domElement.removeEventListener('pointermove', onPointerMove);
           renderer.domElement.removeEventListener('pointerup', onPointerUp);
           renderer.domElement.removeEventListener('pointerleave', onPointerUp);
-          dracoLoader.dispose();
           renderer.dispose();
           if (container.contains(renderer.domElement)) {
             container.removeChild(renderer.domElement);
