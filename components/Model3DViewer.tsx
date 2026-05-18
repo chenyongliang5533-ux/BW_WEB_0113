@@ -35,7 +35,10 @@ export default function Model3DViewer() {
           0.1,
           1000
         );
-        camera.position.set(0, 0, 5);
+        // Position camera above and slightly behind for a "showroom turntable" view
+        // Looking down at ~30° from horizontal, giving a clear view of the top face
+        camera.position.set(0, 3.5, 4);
+        camera.lookAt(0, 0, 0);
 
         const renderer = new THREE.WebGLRenderer({ antialias: true });
         renderer.setSize(container.clientWidth, container.clientHeight);
@@ -94,9 +97,8 @@ export default function Model3DViewer() {
         // Drag-to-rotate interaction
         let isDragging = false;
         let previousPos = { x: 0, y: 0 };
-        // Initial rotation: mostly top-down view with a gentle ~30° forward tilt
-        // -Math.PI / 3 ≈ 60° from front (i.e., 30° down from pure top-view)
-        const rotation = { x: -Math.PI / 3, y: 0 };
+        // No initial model rotation — camera position handles the top-angled view
+        const rotation = { x: 0, y: 0 };
 
         const onPointerDown = (e: PointerEvent) => {
           isDragging = true;
