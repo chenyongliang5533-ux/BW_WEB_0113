@@ -2,6 +2,7 @@
 "use client";
 
 import { useEffect, useRef } from 'react';
+import type { Object3D } from 'three';
 
 export default function Model3DViewer() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -70,7 +71,7 @@ export default function Model3DViewer() {
         // Meshopt decoder (preferred — smaller decoder, native to three.js)
         loader.setMeshoptDecoder(MeshoptDecoder);
 
-        let model: THREE.Object3D | null = null;
+        let model: Object3D | null = null;
 
         loader.load(
           '/models/BWR352.glb',
