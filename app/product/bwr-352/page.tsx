@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { Menu, X, ChevronDown, Globe, Wifi, Shield, Zap, Settings, CheckCircle } from 'lucide-react';
+import { Menu, X, ChevronDown, Globe, Wifi, Shield, Zap, Settings, CheckCircle, Copy, Check } from 'lucide-react';
 import Model3DViewer from '@/components/Model3DViewer';
 
 const BWR352ProductPage = () => {
@@ -11,6 +11,28 @@ const BWR352ProductPage = () => {
   const [supportDropdown, setSupportDropdown] = useState(false);
   const [language, setLanguage] = useState('EN');
   const [selectedImage, setSelectedImage] = useState(0);
+  const [showQuoteModal, setShowQuoteModal] = useState(false);
+  const [emailCopied, setEmailCopied] = useState(false);
+
+  const contactEmail = 'leon@bitswaving.com';
+
+  const handleCopyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(contactEmail);
+      setEmailCopied(true);
+      setTimeout(() => setEmailCopied(false), 2000);
+    } catch (err) {
+      // Fallback for older browsers
+      const textArea = document.createElement('textarea');
+      textArea.value = contactEmail;
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textArea);
+      setEmailCopied(true);
+      setTimeout(() => setEmailCopied(false), 2000);
+    }
+  };
 
   const productImages = [
     "https://images.bitswaving.com/photo-1606904825846-647eb07f5be2?w=800&q=80",
@@ -168,37 +190,40 @@ const BWR352ProductPage = () => {
           <span className="text-gray-900">BWR_352</span>
         </div>
 
-        {/* Product Header */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
-		{/* Product 3D Viewer */}
-			<div>
-			<Model3DViewer />
-			</div>
-          {/* Product Info */}
-          <div>
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">BWR_352</h1>
-            <p className="text-xl text-gray-600 mb-6">
+        {/* Product Header - 3D viewer gets more space (3 cols), info gets less (2 cols) */}
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 mb-16">
+          {/* Product 3D Viewer - Enlarged */}
+          <div className="lg:col-span-3">
+            <div className="relative w-full bg-gray-50 rounded-3xl overflow-hidden" style={{ minHeight: '600px' }}>
+              <Model3DViewer />
+            </div>
+          </div>
+
+          {/* Product Info - Compacted */}
+          <div className="lg:col-span-2">
+            <h1 className="text-3xl font-bold text-gray-900 mb-3">BWR_352</h1>
+            <p className="text-base text-gray-600 mb-5">
               Industrial 4G LTE Router with Dual SIM Failover
             </p>
             
-            <div className="bg-blue-50 rounded-3xl p-6 mb-6">
-              <h3 className="font-semibold text-gray-900 mb-3">Key Highlights</h3>
+            <div className="bg-blue-50 rounded-2xl p-5 mb-5">
+              <h3 className="font-semibold text-gray-900 mb-3 text-sm">Key Highlights</h3>
               <ul className="space-y-2">
                 {keyBenefits.map((benefit, idx) => (
                   <li key={idx} className="flex items-start space-x-2">
-                    <CheckCircle className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
-                    <span className="text-gray-700">{benefit}</span>
+                    <CheckCircle className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
+                    <span className="text-gray-700 text-sm">{benefit}</span>
                   </li>
                 ))}
               </ul>
             </div>
 
-            <div className="flex gap-4">
-              <button className="flex-1 px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition font-medium">
+            <div>
+              <button
+                onClick={() => setShowQuoteModal(true)}
+                className="w-full px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition font-medium"
+              >
                 Request Quote
-              </button>
-              <button className="flex-1 px-6 py-3 border-2 border-gray-300 text-gray-700 rounded-xl hover:bg-gray-50 transition font-medium">
-                Technical Support
               </button>
             </div>
           </div>
@@ -223,64 +248,32 @@ const BWR352ProductPage = () => {
         {/* Technical Specifications */}
         <div className="mb-16">
           <h2 className="text-3xl font-bold text-gray-900 mb-8">Technical Specifications</h2>
-          
-          <div className="bg-white border border-gray-200 rounded-3xl overflow-hidden">
-            <table className="w-full">
-              <tbody>
-                <tr className="border-b border-gray-200">
-                  <td className="px-6 py-4 font-semibold text-gray-900 bg-gray-50 w-1/3">Mobile Connectivity</td>
-                  <td className="px-6 py-4 text-gray-700">5G NR, 4G LTE Cat 6 (300/50 Mbps), 3G HSPA+, 2G EDGE/GPRS</td>
-                </tr>
-                <tr className="border-b border-gray-200">
-                  <td className="px-6 py-4 font-semibold text-gray-900 bg-gray-50">SIM Cards</td>
-                  <td className="px-6 py-4 text-gray-700">Dual SIM (2 x Mini-SIM) with automatic failover</td>
-                </tr>
-                <tr className="border-b border-gray-200">
-                  <td className="px-6 py-4 font-semibold text-gray-900 bg-gray-50">Wi-Fi</td>
-                  <td className="px-6 py-4 text-gray-700">802.11 b/g/n, 2.4 GHz, Access Point & Station modes</td>
-                </tr>
-                <tr className="border-b border-gray-200">
-                  <td className="px-6 py-4 font-semibold text-gray-900 bg-gray-50">Ethernet Ports</td>
-                  <td className="px-6 py-4 text-gray-700">2 x 10/100 Mbps (1 x WAN, 1 x LAN)</td>
-                </tr>
-                <tr className="border-b border-gray-200">
-                  <td className="px-6 py-4 font-semibold text-gray-900 bg-gray-50">CPU</td>
-                  <td className="px-6 py-4 text-gray-700">Dual-core ARM Cortex-A7 @ 880 MHz</td>
-                </tr>
-                <tr className="border-b border-gray-200">
-                  <td className="px-6 py-4 font-semibold text-gray-900 bg-gray-50">Memory</td>
-                  <td className="px-6 py-4 text-gray-700">256 MB RAM, 16 MB Flash</td>
-                </tr>
-                <tr className="border-b border-gray-200">
-                  <td className="px-6 py-4 font-semibold text-gray-900 bg-gray-50">Digital I/O</td>
-                  <td className="px-6 py-4 text-gray-700">2 x Digital inputs, 1 x Digital output</td>
-                </tr>
-                <tr className="border-b border-gray-200">
-                  <td className="px-6 py-4 font-semibold text-gray-900 bg-gray-50">Power Supply</td>
-                  <td className="px-6 py-4 text-gray-700">9-30 VDC, reverse polarity protection, max 10W</td>
-                </tr>
-                <tr className="border-b border-gray-200">
-                  <td className="px-6 py-4 font-semibold text-gray-900 bg-gray-50">Operating Temperature</td>
-                  <td className="px-6 py-4 text-gray-700">-40°C to +75°C (-40°F to +167°F)</td>
-                </tr>
-                <tr className="border-b border-gray-200">
-                  <td className="px-6 py-4 font-semibold text-gray-900 bg-gray-50">Dimensions</td>
-                  <td className="px-6 py-4 text-gray-700">85 x 30 x 78 mm (3.35 x 1.18 x 3.07 inches)</td>
-                </tr>
-                <tr className="border-b border-gray-200">
-                  <td className="px-6 py-4 font-semibold text-gray-900 bg-gray-50">Weight</td>
-                  <td className="px-6 py-4 text-gray-700">180g (0.40 lbs)</td>
-                </tr>
-                <tr className="border-b border-gray-200">
-                  <td className="px-6 py-4 font-semibold text-gray-900 bg-gray-50">Mounting</td>
-                  <td className="px-6 py-4 text-gray-700">DIN rail, wall mount</td>
-                </tr>
-                <tr>
-                  <td className="px-6 py-4 font-semibold text-gray-900 bg-gray-50">Certifications</td>
-                  <td className="px-6 py-4 text-gray-700">CE, FCC, RoHS, IC</td>
-                </tr>
-              </tbody>
-            </table>
+
+          <div className="space-y-3">
+            {[
+              { label: "Mobile Connectivity", value: "5G NR, 4G LTE Cat 6 (300/50 Mbps), 3G HSPA+, 2G EDGE/GPRS" },
+              { label: "SIM Cards", value: "Dual SIM (2 x Mini-SIM) with automatic failover" },
+              { label: "Wi-Fi", value: "802.11 b/g/n, 2.4 GHz, Access Point & Station modes" },
+              { label: "Ethernet Ports", value: "2 x 10/100 Mbps (1 x WAN, 1 x LAN)" },
+              { label: "CPU", value: "Dual-core ARM Cortex-A7 @ 880 MHz" },
+              { label: "Memory", value: "256 MB RAM, 16 MB Flash" },
+              { label: "Digital I/O", value: "2 x Digital inputs, 1 x Digital output" },
+              { label: "Power Supply", value: "9-30 VDC, reverse polarity protection, max 10W" },
+              { label: "Operating Temperature", value: "-40°C to +75°C (-40°F to +167°F)" },
+              { label: "Dimensions", value: "85 x 30 x 78 mm (3.35 x 1.18 x 3.07 inches)" },
+              { label: "Weight", value: "180g (0.40 lbs)" },
+              { label: "Mounting", value: "DIN rail, wall mount" },
+              { label: "Certifications", value: "CE, FCC, RoHS, IC" },
+            ].map((spec, idx) => (
+              <div key={idx} className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                <div className="md:col-span-1 bg-gray-100 rounded-xl px-5 py-3 flex items-center">
+                  <span className="font-semibold text-gray-900">{spec.label}</span>
+                </div>
+                <div className="md:col-span-2 bg-blue-50 rounded-xl px-5 py-3 flex items-center">
+                  <span className="text-gray-700">{spec.value}</span>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
 
@@ -321,6 +314,74 @@ const BWR352ProductPage = () => {
           </div>
         </div>
       </div>
+
+      {/* Request Quote Modal */}
+      {showQuoteModal && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm"
+          onClick={() => setShowQuoteModal(false)}
+        >
+          <div
+            className="bg-white rounded-3xl max-w-md w-full p-8 shadow-2xl relative"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close button */}
+            <button
+              onClick={() => setShowQuoteModal(false)}
+              className="absolute top-4 right-4 p-2 hover:bg-gray-100 rounded-full transition"
+              aria-label="Close"
+            >
+              <X className="w-5 h-5 text-gray-500" />
+            </button>
+
+            {/* Modal content */}
+            <div className="text-center mb-6">
+              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Wifi className="w-8 h-8 text-blue-600" />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-2">Request a Quote</h3>
+              <p className="text-gray-600">
+                Please send your project requirements to the email below, and we'll get back to you with a customized quote.
+              </p>
+            </div>
+
+            {/* Email row with copy button */}
+            <div className="bg-gray-50 rounded-2xl p-4 flex items-center justify-between gap-3 mb-4">
+              <a
+                href={`mailto:${contactEmail}`}
+                className="text-blue-600 font-medium hover:underline truncate"
+              >
+                {contactEmail}
+              </a>
+              <button
+                onClick={handleCopyEmail}
+                className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium transition flex-shrink-0 ${
+                  emailCopied
+                    ? 'bg-green-100 text-green-700'
+                    : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-100'
+                }`}
+                aria-label="Copy email address"
+              >
+                {emailCopied ? (
+                  <>
+                    <Check className="w-4 h-4" />
+                    Copied
+                  </>
+                ) : (
+                  <>
+                    <Copy className="w-4 h-4" />
+                    Copy
+                  </>
+                )}
+              </button>
+            </div>
+
+            <p className="text-xs text-gray-500 text-center">
+              Please include product model, quantity, and your application scenario in your email.
+            </p>
+          </div>
+        </div>
+      )}
 
       {/* Footer */}
       <div className="px-4 sm:px-6 lg:px-8 pb-8 mt-16">
