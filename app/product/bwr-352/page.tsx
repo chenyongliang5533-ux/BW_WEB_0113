@@ -10,7 +10,6 @@ const BWR352ProductPage = () => {
   const [productDropdown, setProductDropdown] = useState(false);
   const [supportDropdown, setSupportDropdown] = useState(false);
   const [language, setLanguage] = useState('EN');
-  const [selectedImage, setSelectedImage] = useState(0);
   const [showQuoteModal, setShowQuoteModal] = useState(false);
   const [emailCopied, setEmailCopied] = useState(false);
 
@@ -34,11 +33,7 @@ const BWR352ProductPage = () => {
     }
   };
 
-  const productImages = [
-    "https://images.bitswaving.com/photo-1606904825846-647eb07f5be2?w=800&q=80",
-    "https://images.bitswaving.com/photo-1545259742-24f497fbbde7?w=800&q=80",
-    "https://images.bitswaving.com/photo-1563013544-824ae1b704d3?w=800&q=80"
-  ];
+
 
   const features = [
     {
@@ -64,12 +59,13 @@ const BWR352ProductPage = () => {
   ];
 
   const keyBenefits = [
-    "99.9% uptime with multi-WAN redundancy",
-    "Industrial temperature range: -40°C to 75°C",
-    "Compact design: 85 x 30 x 78 mm",
-    "DIN rail & wall mounting options",
-    "Digital I/O for automation scenarios",
-    "Easy integration with existing systems"
+    "Supports edge computing for local data processing and automation logic",
+    "Read Modbus RTU/TCP devices and upload data securely to MQTT broker",
+    "Built-in IPsec VPN powered by strongSwan 6.0.6 for enterprise-grade connectivity",
+    "Supports OpenVPN, WireGuard, ZeroTier, GRE, and other mainstream VPN technologies",
+    "Remote device access without public IP via BW Cloud secure networking",
+    "eSIM version available for simplified global deployment and carrier flexibility",
+    "Dual SIM failover ensures reliable always-on cellular connectivity"
   ];
 
   return (
@@ -107,7 +103,7 @@ const BWR352ProductPage = () => {
                     <div className="bg-white border border-gray-200 rounded-lg shadow-lg">
                       <Link href="/product/bwr-352" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-t-lg">BWR-352</Link>
                       <Link href="/product/bw-cloud" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600">BW Cloud</Link>
-                      <a href="#" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-b-lg">Accessories</a>
+                      <Link href="/product/accessories" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-b-lg">Accessories</Link>
                     </div>
                   </div>
                 )}
@@ -194,7 +190,7 @@ const BWR352ProductPage = () => {
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 mb-16">
           {/* Product 3D Viewer - Enlarged */}
           <div className="lg:col-span-3">
-            <div className="relative w-full bg-gray-50 rounded-3xl overflow-hidden" style={{ minHeight: '600px' }}>
+            <div className="relative w-full bg-gray-50 rounded-3xl overflow-hidden" style={{ minHeight: '400px' }}>
               <Model3DViewer />
             </div>
           </div>
@@ -206,9 +202,9 @@ const BWR352ProductPage = () => {
               Industrial 4G LTE Router with Dual SIM Failover
             </p>
             
-            <div className="bg-blue-50 rounded-2xl p-5 mb-5">
-              <h3 className="font-semibold text-gray-900 mb-3 text-sm">Key Highlights</h3>
-              <ul className="space-y-2">
+            <div className="bg-blue-50 rounded-2xl p-6 mb-5">
+              <h3 className="font-semibold text-gray-900 mb-3">Key Highlights</h3>
+              <ul className="space-y-3">
                 {keyBenefits.map((benefit, idx) => (
                   <li key={idx} className="flex items-start space-x-2">
                     <CheckCircle className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
@@ -251,19 +247,21 @@ const BWR352ProductPage = () => {
 
           <div className="space-y-3">
             {[
-              { label: "Mobile Connectivity", value: "5G NR, 4G LTE Cat 6 (300/50 Mbps), 3G HSPA+, 2G EDGE/GPRS" },
-              { label: "SIM Cards", value: "Dual SIM (2 x Mini-SIM) with automatic failover" },
-              { label: "Wi-Fi", value: "802.11 b/g/n, 2.4 GHz, Access Point & Station modes" },
-              { label: "Ethernet Ports", value: "2 x 10/100 Mbps (1 x WAN, 1 x LAN)" },
-              { label: "CPU", value: "Dual-core ARM Cortex-A7 @ 880 MHz" },
-              { label: "Memory", value: "256 MB RAM, 16 MB Flash" },
-              { label: "Digital I/O", value: "2 x Digital inputs, 1 x Digital output" },
-              { label: "Power Supply", value: "9-30 VDC, reverse polarity protection, max 10W" },
-              { label: "Operating Temperature", value: "-40°C to +75°C (-40°F to +167°F)" },
-              { label: "Dimensions", value: "85 x 30 x 78 mm (3.35 x 1.18 x 3.07 inches)" },
-              { label: "Weight", value: "180g (0.40 lbs)" },
+              { label: "CPU", value: "Mediatek MT7628AN: 580 MHz MIPS 24KEc" },
+              { label: "RAM", value: "128 MB DDR2" },
+              { label: "FLASH", value: "32 MB SPI FLASH" },
+              { label: "Cellular Module", value: "Quectel CAT4/CAT1, Fibocom CAT4/CAT1 LTE module " },
+              { label: "Ethernet Ports", value: "5 x 10/100 Mbps RJ45 ports(1 x WAN, 4 x LAN)" },
+              { label: "Serial Ports", value: "1 X RS232 + 1 X RS485" },
+              { label: "WiFi", value: "2T2R 802.11b/g/n 2.4 GHz (300 Mbps) WIFI4" },
+              { label: "Power supply range", value: "9-48 VDC" },
+              { label: "Digital I/O", value: "1 x Digital inputs, 1 x Digital output" },
+              { label: "OS", value: "BWR_OS (based on OPENWRT 24.10)" },
+              { label: "Kernel version", value: "Linux 6.6.122" },
+              { label: "Front-end frameworks", value: "Vanilla JS SPA" },
+              { label: "Back-end frameworks", value: "UCODE + RPCD + UBUS" },
               { label: "Mounting", value: "DIN rail, wall mount" },
-              { label: "Certifications", value: "CE, FCC, RoHS, IC" },
+              { label: "Dimensions", value: "108mmx37mmx97mm" },
             ].map((spec, idx) => (
               <div key={idx} className="grid grid-cols-1 md:grid-cols-3 gap-3">
                 <div className="md:col-span-1 bg-gray-100 rounded-xl px-5 py-3 flex items-center">

@@ -18,37 +18,37 @@ const AccessoriesPage = () => {
       id: 1,
       name: '4G/LTE Antenna',
       image: '/images/accessories/4g_antenna.png',
-      driveLink: '#' // Replace with your Google Drive link
+      driveLink: 'https://drive.google.com/file/d/1dj7PrB-omY1PJ8GD-on-6f7LIfPcPaPE/view?usp=sharing' // Replace with your Google Drive link
     },
     {
       id: 2,
       name: 'WiFi Antenna',
       image: '/images/accessories/wifi_antenna.png',
-      driveLink: '#'
+      driveLink: 'https://drive.google.com/file/d/1ik31Pi04rAKunT0wdBfhu8mkWawqfBz9/view?usp=sharing'
     },
     {
       id: 3,
       name: 'Power Supply 12V',
       image: '/images/accessories/power_adaptor2.png',
-      driveLink: '#'
+      driveLink: 'https://drive.google.com/file/d/1lfzI2jQUq3sTS26NtThoiIh_ZWiCbJRT/view?usp=sharing'
     },
     {
       id: 4,
-      name: '1M Ethernet Cable Cat6',
+      name: '1M Ethernet Cable Cat5e',
       image: '/images/accessories/eth_cable.png',
-      driveLink: '#'
+      driveLink: 'https://drive.google.com/file/d/1pnVIv5SYXrUHXesJd1ULwnd0Tjh2F87n/view?usp=sharing'
     },
     {
       id: 5,
       name: 'DIN Rail Mounting Kit',
       image: '/images/accessories/din_rail.png',
-      driveLink: '#'
+      driveLink: 'https://drive.google.com/file/d/1RG-mFxCa1qX5XZh1GhRpNQhcS6w-DYdR/view?usp=sharing'
     },
     {
       id: 6,
       name: 'RS232 Serial Cable',
       image: '/images/accessories/rs232_cable.png',
-      driveLink: '#'
+      driveLink: 'https://drive.google.com/file/d/1tlt3hkQ5Z3Tvoh9v7HFfPgoSdTHUogek/view?usp=sharing'
     },
     {
       id: 7,
@@ -272,31 +272,7 @@ const AccessoriesPage = () => {
         </div>
       </div>
 
-      {/* Info Section */}
-      <div className="bg-gray-50 py-16">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">
-            Need Help Finding the Right Accessory?
-          </h2>
-          <p className="text-gray-600 mb-8">
-            Click on any accessory to view detailed specifications and compatibility information on our Google Drive
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link 
-              href="/orders"
-              className="px-8 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition font-semibold"
-            >
-              Request Quote
-            </Link>
-            <Link 
-              href="/support"
-              className="px-8 py-3 border-2 border-gray-300 text-gray-700 rounded-xl hover:bg-white transition font-semibold"
-            >
-              Contact Support
-            </Link>
-          </div>
-        </div>
-      </div>
+      
 
       {/* Footer */}
       <div className="px-4 sm:px-6 lg:px-8 pb-8">

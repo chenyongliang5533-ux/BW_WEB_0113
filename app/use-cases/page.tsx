@@ -179,7 +179,7 @@ const UseCasesPage = () => {
               </div>
 
               <Link href="/use-cases" className="text-blue-600 bg-blue-50 px-3 py-2 rounded-lg">Use Cases</Link>
-              <Link href="#" className="text-gray-700 hover:bg-gray-100 px-3 py-2 rounded-lg transition">About Us</Link>
+              <Link href="/about" className="text-gray-700 hover:bg-gray-100 px-3 py-2 rounded-lg transition">About Us</Link>
             </div>
 
             <div className="hidden md:flex items-center space-x-4">

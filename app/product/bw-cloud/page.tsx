@@ -24,7 +24,7 @@ const BWCloudPage = () => {
     {
       icon: <Shield className="w-6 h-6" />,
       title: "Secure Connectivity",
-      description: "All communications encrypted via HTTPS and OpenVPN tunnel, ensuring your data stays protected"
+      description: "Encrypted MQTT transmission protocol ensures secure and reliable communication between devices and cloud"
     },
     {
       icon: <Bell className="w-6 h-6" />,
@@ -39,7 +39,7 @@ const BWCloudPage = () => {
     {
       icon: <Terminal className="w-6 h-6" />,
       title: "Remote Access",
-      description: "Connect to devices via SSH, HTTP, Telnet, RDP, and VNC without requiring public IP addresses"
+      description: "FRP-based secure remote access technology enables private network penetration and remote device UI configuration without public IP"
     }
   ];
 
@@ -147,8 +147,8 @@ const BWCloudPage = () => {
                   <div className="absolute top-full left-0 pt-2 w-48">
                     <div className="bg-white border border-gray-200 rounded-lg shadow-lg">
                       <Link href="/product/bwr-352" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-t-lg">BWR-352</Link>
-                      <a href="#" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600">BW Cloud</a>
-                      <a href="#" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-b-lg">Accessories</a>
+                      <Link href="/product/bw-cloud" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600">BW Cloud</Link>
+                      <Link href="/product/accessories" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-b-lg">Accessories</Link>
                     </div>
                   </div>
                 )}
@@ -167,11 +167,11 @@ const BWCloudPage = () => {
                 {supportDropdown && (
                   <div className="absolute top-full left-0 pt-2 w-48">
                     <div className="bg-white border border-gray-200 rounded-lg shadow-lg">
-                      <a href="#" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-t-lg">Datasheet</a>
-                      <a href="#" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600">User Manual</a>
-                      <a href="#" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600">Firmware</a>
-                      <a href="#" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600">Catalog</a>
-                      <a href="#" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-b-lg">Certificates</a>
+                     <Link href="/support#datasheet" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-t-lg">Datasheet</Link>
+                      <Link href="/support#manual" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600">User Manual</Link>
+                      <Link href="/support#firmware" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600">Firmware</Link>
+                      <Link href="/support#catalog" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600">Catalog</Link>
+                      <Link href="/support#certificate" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-b-lg">Certificates</Link>
                     </div>
                   </div>
                 )}
@@ -223,26 +223,28 @@ const BWCloudPage = () => {
       </nav>
 
       {/* Hero Section */}
-      <div className="bg-blue-100 mx-4 sm:mx-6 lg:mx-8 mt-8 rounded-3xl">
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-20">
-          <div className="max-w-3xl">
-            <div className="flex items-center space-x-2 mb-4">
+      <div className="bg-blue-100 mx-10 sm:mx-20 lg:mx-36 mt-6 rounded-3xl">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-12">
+          <div className="max-w-4xl mx-auto text-center">
+            <div className="flex items-center justify-center space-x-2 mb-4">
               <Cloud className="w-10 h-10 text-blue-600" />
-              <h1 className="text-5xl font-bold text-gray-800">BW Cloud</h1>
+              <h1 className="text-5xl md:text-6xl font-bold text-gray-800 tracking-tight">BW Cloud</h1>
             </div>
-            <p className="text-2xl text-gray-700 mb-8">
+            <p className="text-xl md:text-2xl text-gray-700 mb-6">
               Enterprise Cloud Management Platform for Industrial IoT Networks
             </p>
-            <p className="text-lg text-gray-600 mb-8 leading-relaxed">
+            <p className="text-lg text-gray-600 mb-8 leading-relaxed max-w-3xl mx-auto">
               Monitor, configure, and manage your entire fleet of BWR routers from anywhere. No public IP required. Secure by design. Built for scale.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <button className="px-8 py-3 bg-white text-blue-600 rounded-xl font-semibold hover:bg-gray-50 transition shadow-sm">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a
+                href="https://cloud.bitswaving.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-8 py-3 bg-white text-blue-600 rounded-xl font-semibold hover:bg-gray-50 transition shadow-sm text-center"
+              >
                 Start Free Trial
-              </button>
-              <button className="px-8 py-3 border-2 border-gray-300 text-gray-700 rounded-xl font-semibold hover:bg-white transition">
-                Watch Demo
-              </button>
+              </a>
             </div>
           </div>
         </div>
@@ -267,27 +269,7 @@ const BWCloudPage = () => {
         </div>
       </div>
 
-      {/* Platform Screenshot/Demo */}
-      <div className="bg-gray-50 py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Intuitive Dashboard, Powerful Insights
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Get a complete overview of your network health, device status, and performance metrics at a glance
-            </p>
-          </div>
-          
-          <div className="bg-white rounded-3xl shadow-lg p-8 border border-gray-200">
-            <img 
-              src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80" 
-              alt="BW Cloud Dashboard"
-              className="w-full rounded-xl"
-            />
-          </div>
-        </div>
-      </div>
+      
 
       {/* Detailed Capabilities */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -335,81 +317,6 @@ const BWCloudPage = () => {
         </div>
       </div>
 
-      {/* Pricing Preview */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
-            Flexible Pricing for Every Scale
-          </h2>
-          <p className="text-xl text-gray-600">
-            Start with 5 devices free. Only pay for what you use.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-          <div className="bg-white border border-gray-200 rounded-3xl p-8 text-center">
-            <h3 className="text-2xl font-bold text-gray-900 mb-2">Free Trial</h3>
-            <div className="text-4xl font-bold text-blue-600 mb-4">5 Devices</div>
-            <p className="text-gray-600 mb-6">Perfect for testing and small deployments</p>
-            <ul className="space-y-2 text-gray-700 text-sm mb-6">
-              <li>• 5 GB data included</li>
-              <li>• Basic monitoring</li>
-              <li>• Email support</li>
-            </ul>
-            <button className="w-full py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition font-medium">
-              Start Free
-            </button>
-          </div>
-
-          <div className="bg-gradient-to-br from-blue-600 to-blue-700 text-white border-2 border-blue-600 rounded-3xl p-8 text-center transform scale-105 shadow-xl">
-            <div className="inline-block px-4 py-1 bg-white text-blue-600 rounded-full text-sm font-semibold mb-2">
-              Most Popular
-            </div>
-            <h3 className="text-2xl font-bold mb-2">Pro</h3>
-            <div className="text-4xl font-bold mb-4">Custom</div>
-            <p className="text-blue-100 mb-6">For growing businesses and fleets</p>
-            <ul className="space-y-2 text-sm mb-6">
-              <li>• Unlimited devices</li>
-              <li>• 150 GB data packages</li>
-              <li>• Advanced analytics</li>
-              <li>• Priority support</li>
-            </ul>
-            <button className="w-full py-3 bg-white text-blue-600 rounded-xl hover:bg-gray-50 transition font-medium">
-              Contact Sales
-            </button>
-          </div>
-
-          <div className="bg-white border border-gray-200 rounded-3xl p-8 text-center">
-            <h3 className="text-2xl font-bold text-gray-900 mb-2">Enterprise</h3>
-            <div className="text-4xl font-bold text-blue-600 mb-4">Custom</div>
-            <p className="text-gray-600 mb-6">For large-scale deployments</p>
-            <ul className="space-y-2 text-gray-700 text-sm mb-6">
-              <li>• White-label options</li>
-              <li>• Dedicated support</li>
-              <li>• Custom integrations</li>
-              <li>• SLA guarantee</li>
-            </ul>
-            <button className="w-full py-3 border-2 border-gray-300 text-gray-700 rounded-xl hover:bg-gray-50 transition font-medium">
-              Contact Sales
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* CTA Section */}
-      <div className="bg-gray-900 text-white py-16">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl font-bold mb-6">
-            Ready to Transform Your Network Management?
-          </h2>
-          <p className="text-xl text-gray-300 mb-8">
-            Join hundreds of companies already using BW Cloud to manage their industrial networks
-          </p>
-          <button className="px-10 py-4 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition font-semibold text-lg">
-            Start Your Free Trial Today
-          </button>
-        </div>
-      </div>
 
       {/* Footer */}
       <div className="px-4 sm:px-6 lg:px-8 pb-8 pt-16">
