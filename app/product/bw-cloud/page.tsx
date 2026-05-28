@@ -177,8 +177,8 @@ const BWCloudPage = () => {
                 )}
               </div>
 
-              <a href="#" className="font-semibold text-gray-700 hover:text-blue-600 transition">Use Cases</a>
-              <a href="#" className="font-semibold text-gray-700 hover:text-blue-600 transition">About Us</a>
+              <Link href="/use-cases" className="text-gray-700 hover:bg-gray-100 px-3 py-2 rounded-lg transition">Use Cases</Link>
+              <Link href="/about" className="text-gray-700 hover:bg-gray-100 px-3 py-2 rounded-lg transition">About Us</Link>
             </div>
 
             {/* Right Side */}
