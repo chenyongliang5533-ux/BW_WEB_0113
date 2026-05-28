@@ -29,7 +29,7 @@ const UseCasesPage = () => {
       ],
       bgColor: "bg-blue-50",
       accentColor: "text-blue-600",
-      notionUrl: "https://notion.so/YOUR_LINK_1"  // ← Replace with your Notion link
+      notionUrl: "https://www.notion.so/From-MODBUS-to-MQTT-3687b1b0ca598035a842f13255dc3499"  // ← Replace with your Notion link
     },
     {
       id: 2,
@@ -46,7 +46,7 @@ const UseCasesPage = () => {
       ],
       bgColor: "bg-cyan-50",
       accentColor: "text-cyan-600",
-      notionUrl: "https://notion.so/YOUR_LINK_2"  // ← Replace with your Notion link
+      notionUrl: "https://www.notion.so/From-MODBUS-to-MQTT-3687b1b0ca598035a842f13255dc3499"  // ← Replace with your Notion link
     },
     {
       id: 3,
@@ -63,7 +63,7 @@ const UseCasesPage = () => {
       ],
       bgColor: "bg-violet-50",
       accentColor: "text-violet-600",
-      notionUrl: "https://notion.so/YOUR_LINK_3"  // ← Replace with your Notion link
+      notionUrl: "https://www.notion.so/From-MODBUS-to-MQTT-3687b1b0ca598035a842f13255dc3499"  // ← Replace with your Notion link
     },
     {
       id: 4,
@@ -80,7 +80,7 @@ const UseCasesPage = () => {
       ],
       bgColor: "bg-gray-50",
       accentColor: "text-gray-700",
-      notionUrl: "https://notion.so/YOUR_LINK_4"  // ← Replace with your Notion link
+      notionUrl: "https://www.notion.so/From-MODBUS-to-MQTT-3687b1b0ca598035a842f13255dc3499"  // ← Replace with your Notion link
     },
     {
       id: 5,
@@ -97,7 +97,7 @@ const UseCasesPage = () => {
       ],
       bgColor: "bg-amber-50",
       accentColor: "text-amber-600",
-      notionUrl: "https://notion.so/YOUR_LINK_5"  // ← Replace with your Notion link
+      notionUrl: "https://www.notion.so/From-MODBUS-to-MQTT-3687b1b0ca598035a842f13255dc3499"  // ← Replace with your Notion link
     },
     {
       id: 6,
@@ -114,7 +114,7 @@ const UseCasesPage = () => {
       ],
       bgColor: "bg-teal-50",
       accentColor: "text-teal-600",
-      notionUrl: "https://notion.so/YOUR_LINK_6"  // ← Replace with your Notion link
+      notionUrl: "https://www.notion.so/From-MODBUS-to-MQTT-3687b1b0ca598035a842f13255dc3499"  // ← Replace with your Notion link
     }
   ];
 

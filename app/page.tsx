@@ -17,22 +17,22 @@ const BitsWavingHomepage = () => {
   const newsCards = [
     {
       title: "Introducing BWR-352: Next-Gen Industrial Router",
-      description: "Experience unparalleled connectivity with our latest 5G industrial router featuring dual SIM failover and industrial-grade durability.",
-      date: "Jan 2026",
+      description: "Experience unparalleled connectivity with our latest 4G industrial router featuring dual SIM failover and industrial-grade durability.",
+      date: "June 2026",
       tag: "Product Launch",
       bgColor: "bg-blue-50", 
     },
     {
       title: "BW Cloud Platform Now Available",
       description: "Manage your entire fleet of routers from anywhere with our new cloud management platform. Real-time monitoring and remote configuration made easy.",
-      date: "Dec 2025",
+      date: "June 2026",
       tag: "Platform",
       bgColor: "bg-cyan-50"
     },
     {
       title: "Smart Manufacturing Success Story",
       description: "Learn how a leading automotive manufacturer achieved 99.9% uptime using BWR series routers in their production line.",
-      date: "Nov 2025",
+      date: "June 2026",
       tag: "Use Case",
       bgColor: "bg-indigo-50"
     }

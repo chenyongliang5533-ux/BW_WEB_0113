@@ -268,7 +268,7 @@ const AboutUsPage = () => {
             <h2 className="text-3xl font-bold text-gray-900 mb-6">Who We Are</h2>
             <div className="space-y-4 text-gray-700 leading-relaxed">
               <p>
-                Bitswaving is a startup IoT company founded in <strong>February 2026</strong>. Our team brings over <strong>10 years of experience</strong> implementing IoT projects across various industries.
+                Bitswaving is a startup IoT company founded in <strong>June 2026</strong>. Our team brings over <strong>10 years of experience</strong> implementing IoT projects across various industries.
               </p>
               <p>
                 We focus on providing <strong>secure, stable, and maintainable</strong> IoT terminal devices and cloud services. Our mission is to simplify industrial connectivity while delivering enterprise-grade reliability.

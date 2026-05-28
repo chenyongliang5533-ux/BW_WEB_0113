@@ -70,8 +70,8 @@ const AccessoriesPage = () => {
     },
     {
       id: 10,
-      name: 'SIM Card Adapter',
-      image: '/images/accessories/sim_adaptor.png',
+      name: '7P Terminal block',
+      image: '/images/accessories/7P.png',
       driveLink: '#'
     },
     {
