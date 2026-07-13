@@ -294,17 +294,17 @@ const SupportCenterPage = () => {
                       <div className="min-w-0">
                         <div className="text-xs text-gray-500">For urgent support (WhatsApp)</div>
                         <a
-                          href="https://wa.me/8618060917199"
+                          href="https://wa.me/447907849387"
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-gray-900 font-medium hover:text-green-600 transition truncate block"
                         >
-                          +86 180 6091 7199
+                          +44 7907 849387
                         </a>
                       </div>
                     </div>
                     <button
-                      onClick={() => handleCopy('+8618060917199', 'phone')}
+                      onClick={() => handleCopy('+447907849387', 'phone')}
                       className="flex-shrink-0 ml-3 flex items-center space-x-1 px-3 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition text-sm font-medium"
                       title="Copy phone number"
                     >
