@@ -46,6 +46,9 @@ export default function ProductDropdown({ show }: ProductDropdownProps) {
         <Link href="/product/bw-cloud" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600">
           BW_Cloud
         </Link>
+        <Link href="/product/vpnhub" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600">
+          VPNHUB: WG Portal
+        </Link>
         <Link href="/product/accessories" className="block rounded-b-lg px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600">
           Accessories
         </Link>

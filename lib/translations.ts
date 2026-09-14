@@ -15,6 +15,7 @@ export const translations = {
     products: {
       bwr352: "BWR_352",
       bwCloud: "BW_Cloud",
+      vpnHub: "VPNHUB: WG Portal",
       accessories: "Accessories",
     },
     support: {
@@ -53,6 +54,7 @@ export const translations = {
     products: {
       bwr352: "BWR-352",
       bwCloud: "BW Cloud",
+      vpnHub: "VPNHUB: WG Portal",
       accessories: "Accesorios",
     },
     support: {
