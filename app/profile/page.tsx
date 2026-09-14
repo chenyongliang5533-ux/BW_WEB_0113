@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Menu, X, ChevronDown, Globe, User, LogOut, Package, Save } from 'lucide-react';
 import { useSession, signOut } from 'next-auth/react';
+import ProductDropdown from '@/components/ProductDropdown';
 import { useRouter } from 'next/navigation';
 
 const ProfilePage = () => {
@@ -108,13 +109,7 @@ const ProfilePage = () => {
                   <ChevronDown className="w-4 h-4" />
                 </button>
                 {productDropdown && (
-                  <div className="absolute top-full left-0 pt-2 w-48">
-                    <div className="bg-white border border-gray-200 rounded-lg shadow-lg">
-                      <Link href="/product/bwr-352" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-t-lg">BWR-352</Link>
-                      <Link href="/product/bw-cloud" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600">BW Cloud</Link>
-                      <a href="#" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-b-lg">Accessories</a>
-                    </div>
-                  </div>
+                  <ProductDropdown show={productDropdown} />
                 )}
               </div>
 

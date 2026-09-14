@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { Menu, X, ChevronDown, Globe, Wifi, Shield, Zap, Settings, CheckCircle, Copy, Check } from 'lucide-react';
 import Model3DViewer from '@/components/Model3DViewer';
+import ProductDropdown from '@/components/ProductDropdown';
 
 const BWR352ProductPage = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -99,13 +100,7 @@ const BWR352ProductPage = () => {
                   <ChevronDown className="w-4 h-4" />
                 </button>
                 {productDropdown && (
-                  <div className="absolute top-full left-0 pt-2 w-48">
-                    <div className="bg-white border border-gray-200 rounded-lg shadow-lg">
-                      <Link href="/product/bwr-352" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-t-lg">BWR-352</Link>
-                      <Link href="/product/bw-cloud" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600">BW Cloud</Link>
-                      <Link href="/product/accessories" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-b-lg">Accessories</Link>
-                    </div>
-                  </div>
+                  <ProductDropdown show={productDropdown} />
                 )}
               </div>
 

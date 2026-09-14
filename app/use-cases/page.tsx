@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { Menu, X, ChevronDown, Globe, User, LogOut, Package, Wifi, Shield, Sun, Droplets, Radio, ExternalLink, ArrowRight } from 'lucide-react';
 import { useSession, signOut } from 'next-auth/react';
+import ProductDropdown from '@/components/ProductDropdown';
 
 const UseCasesPage = () => {
   const { data: session } = useSession();
@@ -29,7 +30,7 @@ const UseCasesPage = () => {
       ],
       bgColor: "bg-blue-50",
       accentColor: "text-blue-600",
-      notionUrl: "https://www.notion.so/From-MODBUS-to-MQTT-3687b1b0ca598035a842f13255dc3499"  // ← Replace with your Notion link
+      notionUrl: "https://outrageous-hiss-d19.notion.site/38c7b1b0ca5980b28507dc5afa0e041b?v=38c7b1b0ca59806ba6a1000ccf523375&pvs=74"  // ← Replace with your Notion link
     },
     {
       id: 2,
@@ -46,7 +47,7 @@ const UseCasesPage = () => {
       ],
       bgColor: "bg-cyan-50",
       accentColor: "text-cyan-600",
-      notionUrl: "https://www.notion.so/From-MODBUS-to-MQTT-3687b1b0ca598035a842f13255dc3499"  // ← Replace with your Notion link
+      notionUrl: "https://outrageous-hiss-d19.notion.site/38c7b1b0ca5980b28507dc5afa0e041b?v=38c7b1b0ca59806ba6a1000ccf523375&pvs=74"  // ← Replace with your Notion link
     },
     {
       id: 3,
@@ -63,7 +64,7 @@ const UseCasesPage = () => {
       ],
       bgColor: "bg-violet-50",
       accentColor: "text-violet-600",
-      notionUrl: "https://www.notion.so/From-MODBUS-to-MQTT-3687b1b0ca598035a842f13255dc3499"  // ← Replace with your Notion link
+      notionUrl: "https://outrageous-hiss-d19.notion.site/38c7b1b0ca5980b28507dc5afa0e041b?v=38c7b1b0ca59806ba6a1000ccf523375&pvs=74"  // ← Replace with your Notion link
     },
     {
       id: 4,
@@ -80,7 +81,7 @@ const UseCasesPage = () => {
       ],
       bgColor: "bg-gray-50",
       accentColor: "text-gray-700",
-      notionUrl: "https://www.notion.so/From-MODBUS-to-MQTT-3687b1b0ca598035a842f13255dc3499"  // ← Replace with your Notion link
+      notionUrl: "https://outrageous-hiss-d19.notion.site/38c7b1b0ca5980b28507dc5afa0e041b?v=38c7b1b0ca59806ba6a1000ccf523375&pvs=74"  // ← Replace with your Notion link
     },
     {
       id: 5,
@@ -97,7 +98,7 @@ const UseCasesPage = () => {
       ],
       bgColor: "bg-amber-50",
       accentColor: "text-amber-600",
-      notionUrl: "https://www.notion.so/From-MODBUS-to-MQTT-3687b1b0ca598035a842f13255dc3499"  // ← Replace with your Notion link
+      notionUrl: "https://outrageous-hiss-d19.notion.site/38c7b1b0ca5980b28507dc5afa0e041b?v=38c7b1b0ca59806ba6a1000ccf523375&pvs=74"  // ← Replace with your Notion link
     },
     {
       id: 6,
@@ -114,7 +115,7 @@ const UseCasesPage = () => {
       ],
       bgColor: "bg-teal-50",
       accentColor: "text-teal-600",
-      notionUrl: "https://www.notion.so/From-MODBUS-to-MQTT-3687b1b0ca598035a842f13255dc3499"  // ← Replace with your Notion link
+      notionUrl: "https://outrageous-hiss-d19.notion.site/38c7b1b0ca5980b28507dc5afa0e041b?v=38c7b1b0ca59806ba6a1000ccf523375&pvs=74"  // ← Replace with your Notion link
     }
   ];
 
@@ -146,13 +147,7 @@ const UseCasesPage = () => {
                   <ChevronDown className="w-4 h-4" />
                 </button>
                 {productDropdown && (
-                  <div className="absolute top-full left-0 pt-2 w-48">
-                    <div className="bg-white border border-gray-200 rounded-lg shadow-lg">
-                      <Link href="/product/bwr-352" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-t-lg">BWR_352</Link>
-                      <Link href="/product/bw-cloud" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600">BW_Cloud</Link>
-                      <Link href="/product/accessories" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-b-lg">Accessories</Link>
-                    </div>
-                  </div>
+                  <ProductDropdown show={productDropdown} />
                 )}
               </div>
 
