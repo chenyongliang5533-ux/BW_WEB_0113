@@ -14,6 +14,7 @@ export const translations = {
     },
     products: {
       bwr352: "BWR_352",
+      bwr352Outdoor: "BWR_352_Outdoor",
       bwCloud: "BW_Cloud",
       vpnHub: "VPNHUB: WG Portal",
       accessories: "Accessories",
@@ -44,6 +45,12 @@ export const translations = {
           description: "Experience unparalleled connectivity with our latest 4G industrial router featuring dual SIM failover and industrial-grade durability.",
           date: "June 2026",
           tag: "Product Launch",
+        },
+        {
+          title: "Introducing BWR_352_Outdoor: IPX6 Housing for BWR-352",
+          description: "Take the BWR-352 board outdoors in a sealed ABS enclosure rated IPX6. Three waterproof cable glands route the 4G and Wi-Fi antennas plus your power, serial or Ethernet run, with wall and pole mounting and an optional PoE adapter.",
+          date: "June 2026",
+          tag: "New Product",
         },
         {
           title: "Introducing BWR_E01: Compact 4G Cat-1 RTU",
@@ -101,6 +108,7 @@ export const translations = {
     },
     products: {
       bwr352: "BWR-352",
+      bwr352Outdoor: "BWR-352 Outdoor",
       bwCloud: "BW Cloud",
       vpnHub: "VPNHUB: WG Portal",
       accessories: "Accesorios",
@@ -131,6 +139,12 @@ export const translations = {
           description: "Descubre una conectividad sin igual con nuestro último router industrial 4G, con conmutación por error de doble SIM y durabilidad de grado industrial.",
           date: "Junio 2026",
           tag: "Lanzamiento",
+        },
+        {
+          title: "Presentamos el BWR_352_Outdoor: carcasa IPX6 para el BWR-352",
+          description: "Lleva la placa BWR-352 al exterior en una carcasa de ABS sellada con grado IPX6. Tres prensaestopas estancos dan salida a las antenas 4G y Wi-Fi y al cable de alimentación, serie o Ethernet, con montaje en pared y poste y adaptador PoE opcional.",
+          date: "Junio 2026",
+          tag: "Nuevo Producto",
         },
         {
           title: "Presentamos el BWR_E01: RTU 4G Cat-1 compacta",

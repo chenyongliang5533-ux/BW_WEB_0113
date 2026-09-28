@@ -25,6 +25,9 @@ export default function ProductDropdown({ show }: ProductDropdownProps) {
               <Link href="/product/bwr-352" className="block rounded-lg px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600">
                 BWR_352
               </Link>
+              <Link href="/product/bwr-352-outdoor" className="block rounded-lg px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600">
+                BWR_352_Outdoor
+              </Link>
             </div>
           </div>
         </div>

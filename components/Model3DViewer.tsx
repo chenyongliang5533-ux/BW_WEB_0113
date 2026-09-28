@@ -4,7 +4,12 @@
 import { useEffect, useRef } from 'react';
 import type { Object3D } from 'three';
 
-export default function Model3DViewer() {
+type Model3DViewerProps = {
+  /** Path to the glTF/GLB model to display. Defaults to the BWR_352 model. */
+  modelPath?: string;
+};
+
+export default function Model3DViewer({ modelPath = '/models/BWR352.glb' }: Model3DViewerProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -71,7 +76,7 @@ export default function Model3DViewer() {
         let model: Object3D | null = null;
 
         loader.load(
-          '/models/BWR352.glb',
+          modelPath,
           (gltf) => {
             if (cancelled) return;
             model = gltf.scene;
@@ -172,7 +177,7 @@ export default function Model3DViewer() {
       cancelled = true;
       if (cleanup) cleanup();
     };
-  }, []);
+  }, [modelPath]);
 
   return (
     <div className="w-full h-full">

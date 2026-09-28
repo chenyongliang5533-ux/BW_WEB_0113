@@ -7,20 +7,33 @@ import { useSession, signOut } from 'next-auth/react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { translations } from '@/lib/translations';
 import ProductDropdown from '@/components/ProductDropdown';
+import HeroStarfield from '@/components/HeroStarfield';
+
+/* Every news card shares one soft light-blue look: a pale blue gradient wash plus a faint
+   radial halo in the top-right corner. Only the destination link differs per card. */
+const NEWS_CARD_TINT = 'bg-gradient-to-br from-sky-50 via-blue-50 to-blue-100';
+const NEWS_CARD_RULE = 'from-sky-300 via-blue-400 to-blue-500';
+const NEWS_CARD_CTA = 'text-blue-700';
+const NEWS_CARD_GLOW =
+  'bg-[radial-gradient(circle_at_top_right,rgba(96,165,250,0.35),rgba(96,165,250,0.12)_45%,transparent_72%)]';
 
 const newsCardVisuals = [
-  { href: '/product/bwr-352', tint: 'bg-gradient-to-br from-blue-50 via-white to-blue-100', rule: 'from-blue-400 to-blue-600', cta: 'text-blue-700' },
-  { href: '/product/bwr-e01', tint: 'bg-gradient-to-br from-cyan-50 via-white to-sky-100', rule: 'from-cyan-400 to-sky-600', cta: 'text-cyan-700' },
-  { href: '/product/bwc-z1', tint: 'bg-gradient-to-br from-indigo-50 via-white to-indigo-100', rule: 'from-indigo-400 to-indigo-600', cta: 'text-indigo-700' },
-  { href: '/product/bwd-f1', tint: 'bg-gradient-to-br from-violet-50 via-white to-violet-100', rule: 'from-violet-400 to-violet-600', cta: 'text-violet-700' },
-  { href: '/product/vpnhub', tint: 'bg-gradient-to-br from-emerald-50 via-white to-emerald-100', rule: 'from-emerald-400 to-emerald-600', cta: 'text-emerald-700' },
-  { href: '/product/bw-cloud', tint: 'bg-gradient-to-br from-sky-50 via-white to-sky-100', rule: 'from-sky-400 to-sky-600', cta: 'text-sky-700' },
-  { href: '/use-cases', tint: 'bg-gradient-to-br from-amber-50 via-white to-amber-100', rule: 'from-amber-400 to-amber-600', cta: 'text-amber-700' },
+  { href: '/product/bwr-352' },
+  { href: '/product/bwr-352-outdoor' },
+  { href: '/product/bwr-e01' },
+  { href: '/product/bwc-z1' },
+  { href: '/product/bwd-f1' },
+  { href: '/product/vpnhub' },
+  { href: '/product/bw-cloud' },
+  { href: '/use-cases' },
 ];
 
 /* English cards define the shape and order; the text itself comes from the active language. */
 const newsCards = translations.en.news.cards.map((card, index) => ({
   ...card,
+  tint: NEWS_CARD_TINT,
+  rule: NEWS_CARD_RULE,
+  cta: NEWS_CARD_CTA,
   ...newsCardVisuals[index],
 }));
 
@@ -33,6 +46,9 @@ const BitsWavingHomepage = () => {
   const [profileDropdown, setProfileDropdown] = useState(false);
   const [activeCard, setActiveCard] = useState(0);
   const newsTrackRef = useRef<HTMLDivElement | null>(null);
+  const heroRef = useRef<HTMLDivElement | null>(null);
+  /* Cursor position over the hero, in CSS pixels, used to pull the backdrop motes along. */
+  const [heroPointer, setHeroPointer] = useState<{ x: number; y: number } | null>(null);
   const newsSectionVisible = useRef(false);
   const suppressClickUntil = useRef(0);
   const dragState = useRef<{ active: boolean; startX: number; startScrollLeft: number; moved: boolean }>({
@@ -213,6 +229,17 @@ const BitsWavingHomepage = () => {
     }
   };
 
+  /* Track the cursor in the hero's own coordinate space; the backdrop reads it from state and
+     falls back to releasing the motes as soon as the pointer leaves. */
+  const handleHeroPointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (event.pointerType === 'touch') return;
+    const bounds = heroRef.current?.getBoundingClientRect();
+    if (!bounds) return;
+    setHeroPointer({ x: event.clientX - bounds.left, y: event.clientY - bounds.top });
+  };
+
+  const handleHeroPointerLeave = () => setHeroPointer(null);
+
   return (
     <div className="min-h-screen bg-white">
       {/* Header with Navigation */}
@@ -380,11 +407,25 @@ const BitsWavingHomepage = () => {
       {/* Hero Section */}
 			<div className="mt-8">
 				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-					<div className="bg-blue-100 rounded-3xl py-16 text-center">
-						<h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-800">
+					<div
+						ref={heroRef}
+						onPointerMove={handleHeroPointerMove}
+						onPointerLeave={handleHeroPointerLeave}
+						onPointerCancel={handleHeroPointerLeave}
+						className="relative isolate overflow-hidden rounded-3xl bg-blue-100 py-16 text-center"
+					>
+						{/* Pale blue wash, soft halo and twinkling motes, sitting under the copy. The
+						    copy gets its own layer: a full-size canvas that repaints every frame is
+						    composited separately, and without this it paints over the text. */}
+						<HeroStarfield
+							pointerX={heroPointer?.x ?? null}
+							pointerY={heroPointer?.y ?? null}
+							className="-z-10"
+						/>
+						<h1 className="relative z-10 text-4xl md:text-5xl font-bold mb-6 text-gray-800">
 							Industrial Connectivity Solutions
 						</h1>
-						<p className="text-xl text-gray-600 mb-6 max-w-3xl mx-auto">
+						<p className="relative z-10 text-xl text-gray-600 mb-6 max-w-3xl mx-auto">
 							Reliable, secure, and intelligent networking equipment for Industry 4.0
 						</p>
 					</div>
@@ -442,19 +483,23 @@ const BitsWavingHomepage = () => {
                   href={card.href}
                   onClick={handleCardClick}
                   draggable={false}
-                  className={`group relative flex h-full flex-col overflow-hidden rounded-3xl border border-gray-200 ${card.tint} p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-blue-300 hover:shadow-xl`}
+                  className={`group relative flex h-full flex-col overflow-hidden rounded-3xl border border-blue-100 ${card.tint} p-6 shadow-sm shadow-blue-100/60 transition duration-300 hover:-translate-y-1 hover:border-blue-300 hover:shadow-xl hover:shadow-blue-200/60`}
                 >
+                  <span
+                    className={`pointer-events-none absolute inset-0 ${NEWS_CARD_GLOW} opacity-80 transition-opacity duration-300 group-hover:opacity-100`}
+                    aria-hidden="true"
+                  />
                   <span className={`absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r ${card.rule}`} aria-hidden="true" />
-                  <div className="mb-4 flex items-center justify-between gap-3">
-                    <span className="rounded-full border border-gray-200 bg-white px-3 py-1 text-sm font-medium text-gray-700">
+                  <div className="relative mb-4 flex items-center justify-between gap-3">
+                    <span className="rounded-full border border-blue-100 bg-white/80 px-3 py-1 text-sm font-medium text-blue-700">
                       {content.tag}
                     </span>
                     <span className="text-sm text-gray-500">{content.date}</span>
                   </div>
 
-                  <h3 className="mb-3 text-xl font-semibold text-gray-900">{content.title}</h3>
-                  <p className="mb-6 leading-relaxed text-gray-600">{content.description}</p>
-                  <span className={`mt-auto inline-flex items-center gap-1 text-sm font-semibold ${card.cta}`}>
+                  <h3 className="relative mb-3 text-xl font-semibold text-gray-900">{content.title}</h3>
+                  <p className="relative mb-6 leading-relaxed text-gray-600">{content.description}</p>
+                  <span className={`relative mt-auto inline-flex items-center gap-1 text-sm font-semibold ${card.cta}`}>
                     {t.news.learnMore}
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </span>
