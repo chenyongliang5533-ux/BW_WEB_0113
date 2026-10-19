@@ -86,6 +86,18 @@ const AccessoriesPage = () => {
       name: 'Console Cable',
       image: '/images/accessories/console_cable.png',
       driveLink: '#'
+    },
+    {
+      id: 13,
+      name: 'Quick-Lock Waterproof Connector',
+      image: '/images/accessories/quick_lock_connector.png',
+      driveLink: '#'
+    },
+    {
+      id: 14,
+      name: 'IP68 Junction Box',
+      image: '/images/accessories/junction_box.png',
+      driveLink: '#'
     }
   ];
 

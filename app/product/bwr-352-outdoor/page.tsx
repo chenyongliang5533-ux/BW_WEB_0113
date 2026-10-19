@@ -28,15 +28,19 @@ import ProductDropdown from '@/components/ProductDropdown';
 const galleryImages = [
   {
     src: '/images/products/bwr-352-outdoor-kit.jpg',
-    alt: 'BWR_352_Outdoor IPX6 enclosure with BWR_352 board, 4G and Wi-Fi antennas and PoE input cable',
+    alt: 'BWR_352_Outdoor 190 × 190 × 42 mm ABS enclosure with four M12 glands, quick-lock power connector, waterproof junction box and Ethernet cable',
   },
   {
-    src: '/images/products/bwr-352-outdoor-enclosure.png',
-    alt: 'BWR_352_Outdoor sealed ABS enclosure with waterproof cable glands',
+    src: '/images/products/bwr-352-outdoor-internal-antenna.jpg',
+    alt: 'BWR_352_Outdoor enclosure open, showing the two internal 4G and Wi-Fi stub antennas fitted to the BWR_352 board',
   },
   {
-    src: '/images/products/bwr-352-outdoor-open.jpg',
-    alt: 'BWR_352_Outdoor enclosure shown open with IPX6 gasket seal and mounting bosses',
+    src: '/images/products/bwr-352-outdoor-external-antenna.jpg',
+    alt: 'BWR_352_Outdoor enclosure open with SMA antenna feeds for external 4G and Wi-Fi antennas',
+  },
+  {
+    src: '/images/products/bwr-352-outdoor-pole-mount.jpg',
+    alt: 'BWR_352_Outdoor fixed to a pole with two stainless band clamps and its Ethernet run',
   },
 ];
 
@@ -71,31 +75,57 @@ const BWR352OutdoorProductPage = () => {
   };
 
   const keyBenefits = [
-    'Outdoor-ready IPX6 waterproof enclosure, built from UV-stabilised ABS (148 × 148 × 65 mm)',
+    'Slim 190 × 190 × 42 mm sealed ABS enclosure, rated IPX6 for rain, hose spray and dust',
+    '4 × M12 waterproof glands for DC power, Ethernet / PoE, serial and an antenna or sensor run',
+    'Internal 4G and Wi-Fi stub antennas fitted as standard — nothing protrudes from the box',
+    'Optional external SMA antennas for weak-signal sites, no change to the enclosure',
+    'Power either way: 9–48 VDC direct, or a non-standard PoE adapter over the Ethernet cable',
+    'Quick-lock waterproof connector and IP68 junction box options complete the outdoor run',
     'Drop your existing BWR_352 board straight in — same firmware, same features, no redesign',
-    '3 × waterproof cable glands: 4G antenna, Wi-Fi antenna, power / serial / Ethernet cables',
-    'PoE adapter option — run power and data over a single Ethernet cable when no DC source is on site',
-    'Wall-mount bracket and pole clamp mounting (band clamp) for cabinets, poles and street furniture',
   ];
 
   const features = [
     {
       icon: <Droplets className="w-6 h-6" />,
-      title: 'IPX6 Outdoor Enclosure',
+      title: 'Slim IPX6 ABS Enclosure',
       description:
-        'Sealed IPX6 ABS housing with a moulded gasket keeps rain, hose spray and dust away from the router board, so BWR_352 can be deployed where cabinets are not available.',
+        'A 190 × 190 × 42 mm UV-stabilised ABS shell with a moulded gasket protects the router board while sitting close to the wall, the mast bracket or the back of a cabinet.',
     },
     {
       icon: <Cable className="w-6 h-6" />,
-      title: '3 × Waterproof Cable Glands',
+      title: '4 × M12 Waterproof Glands',
       description:
-        'Three glands provide watertight entries for the 4G suction antenna, the Wi-Fi suction antenna and the power, serial or Ethernet cable run — with strain relief on every cable.',
+        'Four M12 glands give sealed entries for DC power, the Ethernet / PoE link, an RS232/RS485 serial run and an antenna or sensor cable — each with its own seal and strain relief, so no on-site drilling.',
+    },
+    {
+      icon: <Wifi className="w-6 h-6" />,
+      title: 'Internal 4G + Wi-Fi Antennas',
+      description:
+        'The standard build fits compact 4G and Wi-Fi stub antennas on right-angle SMA adapters inside the lid. Nothing sticks out of the enclosure, so the RF path is protected and the profile stays low.',
+    },
+    {
+      icon: <Radio className="w-6 h-6" />,
+      title: 'External SMA Option',
+      description:
+        'For marginal coverage, specify the external variant: SMA feeds pass through the enclosure so a higher-gain 4G or Wi-Fi antenna can be mounted and aimed outside, while the board stays sealed inside.',
     },
     {
       icon: <Plug className="w-6 h-6" />,
-      title: 'PoE Adapter Option',
+      title: 'DC or PoE Power',
       description:
-        'Where a local DC source is inconvenient, add a PoE adapter and feed the router over the Ethernet cable itself — single-cable installation that reaches up to 100 m.',
+        'Feed 9–48 VDC straight to the terminal block, or add the non-standard passive PoE adapter and power the router over the Ethernet pairs — one cable up the pole, up to 100 m.',
+    },
+    {
+      icon: <Wrench className="w-6 h-6" />,
+      title: 'Wall & Pole Mounting',
+      description:
+        'The bracket fixes with four corner screws for walls, cabinets and flat surfaces, or with two stainless steel band clamps for masts and poles; 4G / Wi-Fi and cable accessories bolt on without extra holes.',
+    },
+    {
+      icon: <Shield className="w-6 h-6" />,
+      title: 'Same Industrial Features',
+      description:
+        'BWR_OS on OpenWrt 24.10, IPsec / OpenVPN / WireGuard, Modbus RTU polling, MQTT reporting and BW Cloud remote management all carry over unchanged.',
     },
     {
       icon: <Cpu className="w-6 h-6" />,
@@ -103,17 +133,61 @@ const BWR352OutdoorProductPage = () => {
       description:
         'The same Cat 4 / Cat 1 LTE board, dual SIM failover, 5 × Ethernet, RS232/RS485 and DI/DO ports — only the mechanical envelope changes.',
     },
+  ];
+
+  const antennaOptions = [
     {
-      icon: <Wrench className="w-6 h-6" />,
-      title: 'Wall & Pole Mounting',
-      description:
-        'Four internal mounting bosses plus reinforced corner holes support wall-mount brackets and band clamps, so the unit fixes to walls, masts and poles.',
+      image: '/images/products/bwr-352-outdoor-internal-antenna.jpg',
+      alt: 'BWR_352_Outdoor internal 4G and Wi-Fi stub antennas fitted inside the lid',
+      badge: 'Standard',
+      badgeClass: 'bg-blue-600 text-white',
+      title: 'Internal 4G + Wi-Fi Antennas',
+      points: [
+        'Compact stub antennas on right-angle SMA adapters, fitted inside the lid',
+        'Nothing protrudes: the box keeps its 42 mm profile and has no antenna to knock',
+        'Best for street furniture, meter cabinets, basements and built-up areas',
+        'No extra connector to seal, so the enclosure stays fully closed',
+      ],
     },
     {
-      icon: <Shield className="w-6 h-6" />,
-      title: 'Same Industrial Features',
+      image: '/images/products/bwr-352-outdoor-external-antenna.jpg',
+      alt: 'BWR_352_Outdoor SMA feeds for external 4G and Wi-Fi antennas',
+      badge: 'Option',
+      badgeClass: 'bg-pink-600 text-white',
+      title: 'External SMA Antennas',
+      points: [
+        'SMA feeds replace the internal stubs so an external antenna can be connected',
+        'Fit a higher-gain 4G antenna aimed at the cell site, or a Wi-Fi antenna for long links',
+        'Choose this where the router sits in a metal cabinet, a pit or a weak-signal area',
+        'Antenna leads stay inside the sealed enclosure; only the antenna sits outside',
+      ],
+    },
+  ];
+
+  const outdoorAccessories = [
+    {
+      image: '/images/products/quick-lock-waterproof-connector.png',
+      alt: 'Quick-lock outdoor waterproof connector with PG13.5 gland and push-in terminals',
+      title: 'Quick-Lock Waterproof Connector',
       description:
-        'BWR_OS on OpenWrt 24.10, IPsec / OpenVPN / WireGuard, Modbus RTU polling, MQTT reporting and BW Cloud remote management all carry over unchanged.',
+        'Field-installable connector with a PG13.5 cable entry and push-in terminals: 85 ± 0.5 mm long, Ø29 mm body. Use it to break a power or RS485 run at the pole so the router can be unplugged, swapped or serviced without cutting the cable.',
+      points: [
+        'PG13.5 gland, 85 ± 0.5 mm body, Ø29 mm',
+        'Push-in terminals — no crimping tools on site',
+        'A quarter turn locks the halves; the seal stays captive',
+      ],
+    },
+    {
+      image: '/images/products/outdoor-waterproof-junction-box.png',
+      alt: 'Cedgen CDE106 IP68 outdoor waterproof junction box with two M-series glands',
+      title: 'Outdoor Waterproof Junction Box',
+      description:
+        'IP68 junction box (CDE106, 41 A / 450 V, T85) with two cable glands. It gives the DC supply or a splice a sealed home on the mast and feeds the router through one of its own M12 glands.',
+      points: [
+        'IP68, 41 A / 450 V, T85, RoHS and CE marked',
+        'Two glands in, four screw-down lid fixings',
+        'Pairs with the PoE injector or the DC power supply',
+      ],
     },
   ];
 
@@ -134,14 +208,15 @@ const BWR352OutdoorProductPage = () => {
   ];
 
   const enclosureSpecs = [
-    { label: 'Model', value: 'BWR_352_Outdoor (BWR_352 board + outdoor enclosure kit)' },
-    { label: 'Enclosure material', value: 'ABS' },
-    { label: 'Ingress protection', value: 'IPX6' },
-    { label: 'Dimensions', value: '148 mm (L) x 148 mm (W) x 65 mm (H)' },
-    { label: 'Cable entries', value: '3 x waterproof cable glands (4G antenna, Wi-Fi antenna, cable run)' },
-    { label: 'Power options', value: '9-48 VDC input, or PoE adapter for power-over-Ethernet' },
-    { label: 'Mounting', value: 'Wall mount and pole mount (band clamp)' },
-    { label: 'Antennas', value: 'External 4G and Wi-Fi suction antennas with magnetic bases' },
+    { label: 'Model', value: 'BWR_352_Outdoor (BWR_352 board + 190 × 190 × 42 mm outdoor enclosure kit)' },
+    { label: 'Enclosure material', value: 'ABS, UV-stabilised' },
+    { label: 'Ingress protection', value: 'IPX6 (enclosure); IP68 for the optional junction box' },
+    { label: 'Dimensions', value: '190 mm (L) x 190 mm (W) x 42 mm (H)' },
+    { label: 'Cable entries', value: '4 x M12 waterproof glands (power, Ethernet / PoE, serial, antenna or sensor)' },
+    { label: 'Antennas', value: 'Internal 4G + Wi-Fi stub antennas (standard); external SMA antennas (optional)' },
+    { label: 'Power options', value: '9-48 VDC direct input, or non-standard passive PoE adapter over the Ethernet cable' },
+    { label: 'Mounting', value: 'Wall / cabinet mount (4 corner screws) and pole mount with 2 stainless band clamps' },
+    { label: 'Accessory options', value: 'Quick-lock outdoor waterproof connector (PG13.5, 85 ± 0.5 mm, Ø29 mm); outdoor waterproof junction box (CDE106, 41 A / 450 V, IP68)' },
   ];
 
   const specRow = (spec: { label: string; value: string }, idx: number) => (
@@ -342,7 +417,8 @@ const BWR352OutdoorProductPage = () => {
           <div className="lg:col-span-2">
             <h1 className="text-3xl font-bold text-gray-900 mb-3">BWR_352_Outdoor</h1>
             <p className="text-base text-gray-600 mb-5">
-              Outdoor IPX6 Enclosure Kit for the BWR_352 Industrial 4G Router
+              Outdoor IPX6 Enclosure Kit for the BWR_352 Industrial 4G Router — 190 × 190 × 42 mm ABS,
+              four M12 glands, internal or external antennas
             </p>
 
             <div className="bg-blue-50 rounded-2xl p-6 mb-5">
@@ -370,11 +446,15 @@ const BWR352OutdoorProductPage = () => {
                 </div>
                 <div>
                   <dt className="text-gray-500">Size (L×W×H)</dt>
-                  <dd className="font-semibold text-gray-900">148 × 148 × 65 mm</dd>
+                  <dd className="font-semibold text-gray-900">190 × 190 × 42 mm</dd>
                 </div>
                 <div>
                   <dt className="text-gray-500">Cable glands</dt>
-                  <dd className="font-semibold text-gray-900">3 × waterproof</dd>
+                  <dd className="font-semibold text-gray-900">4 × M12 waterproof</dd>
+                </div>
+                <div>
+                  <dt className="text-gray-500">Antennas</dt>
+                  <dd className="font-semibold text-gray-900">Internal / SMA option</dd>
                 </div>
                 <div>
                   <dt className="text-gray-500">Mounting</dt>
@@ -383,6 +463,10 @@ const BWR352OutdoorProductPage = () => {
                 <div>
                   <dt className="text-gray-500">Power</dt>
                   <dd className="font-semibold text-gray-900">DC or PoE adapter</dd>
+                </div>
+                <div>
+                  <dt className="text-gray-500">Accessories</dt>
+                  <dd className="font-semibold text-gray-900">Connector / junction box</dd>
                 </div>
               </dl>
             </div>
@@ -420,16 +504,54 @@ const BWR352OutdoorProductPage = () => {
           </div>
         </div>
 
+        {/* Antenna options */}
+        <div className="mb-16">
+          <h2 className="text-3xl font-bold text-gray-900 mb-3">Choose Your Antennas</h2>
+          <p className="text-gray-600 mb-8 max-w-3xl">
+            One enclosure covers both deployment styles. The internal antenna set ships as standard; the
+            external SMA version is a build option for sites where the signal has to be chased.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {antennaOptions.map((option) => (
+              <div key={option.title} className="bg-gray-50 rounded-3xl overflow-hidden">
+                <div className="relative aspect-[4/3] bg-white">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={option.image}
+                    alt={option.alt}
+                    className="absolute inset-0 h-full w-full object-cover"
+                    style={{ objectPosition: 'center 18%' }}
+                  />
+                  <span className={`absolute top-4 left-4 rounded-full px-3 py-1 text-xs font-semibold ${option.badgeClass}`}>
+                    {option.badge}
+                  </span>
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-semibold text-gray-900 mb-3">{option.title}</h3>
+                  <ul className="space-y-2">
+                    {option.points.map((point) => (
+                      <li key={point} className="flex items-start gap-2 text-sm text-gray-700">
+                        <CheckCircle className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
+                        <span>{point}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
         {/* Outdoor deployment / power note */}
         <div className="mb-16 grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="bg-cyan-50 rounded-3xl p-6">
             <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-cyan-600 mb-4">
               <Radio className="w-6 h-6" />
             </div>
-            <h3 className="font-semibold text-gray-900 mb-3">Antennas Outside the Box</h3>
+            <h3 className="font-semibold text-gray-900 mb-3">Antennas Inside the Box</h3>
             <p className="text-gray-700 text-sm">
-              The magnetic-base 4G and Wi-Fi suction antennas mount on the outside of the enclosure and
-              connect through dedicated glands, keeping RF performance while the board stays sealed.
+              The internal 4G and Wi-Fi stub antennas are fitted on the board before the lid goes on, so the
+              enclosure arrives closed and sealed. Ask for the SMA version if the antenna has to sit outside.
             </p>
           </div>
           <div className="bg-pink-50 rounded-3xl p-6">
@@ -438,19 +560,63 @@ const BWR352OutdoorProductPage = () => {
             </div>
             <h3 className="font-semibold text-gray-900 mb-3">PoE When DC Is Hard</h3>
             <p className="text-gray-700 text-sm">
-              If there is no convenient DC outlet on site, add the PoE adapter and power the router
-              through the same Ethernet cable that carries the data — one cable, one gland.
+              If there is no convenient DC outlet on site, add the non-standard PoE adapter and power the
+              router through the same Ethernet cable that carries the data — one cable, one gland.
             </p>
           </div>
           <div className="bg-gray-50 rounded-3xl p-6">
             <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-gray-600 mb-4">
-              <Wifi className="w-6 h-6" />
+              <Cable className="w-6 h-6" />
             </div>
-            <h3 className="font-semibold text-gray-900 mb-3">Cable Routing</h3>
+            <h3 className="font-semibold text-gray-900 mb-3">Four Glands, Every Cable</h3>
             <p className="text-gray-700 text-sm">
-              One gland for the 4G antenna, one for the Wi-Fi antenna and one for the cable run —
-              9-48 VDC power, RS232/RS485 serial or the Ethernet/PoE link, all watertight.
+              DC power, the Ethernet / PoE link, an RS232/RS485 run and an antenna or sensor lead — four M12
+              glands cover the whole installation, so nothing is left routed through an open lid.
             </p>
+          </div>
+        </div>
+
+        {/* Outdoor accessories */}
+        <div className="mb-16">
+          <h2 className="text-3xl font-bold text-gray-900 mb-3">Outdoor Cable &amp; Power Accessories</h2>
+          <p className="text-gray-600 mb-8 max-w-3xl">
+            Everything needed to finish the run outside the enclosure. Order either accessory with the kit,
+            or both when the site needs a serviceable power joint and a sealed home for the supply.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {outdoorAccessories.map((item) => (
+              <div key={item.title} className="bg-gray-50 rounded-3xl overflow-hidden">
+                <div className="aspect-[4/3] bg-white p-6 flex items-center justify-center">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={item.image}
+                    alt={item.alt}
+                    className="max-h-full max-w-full object-contain"
+                  />
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">{item.title}</h3>
+                  <p className="text-gray-600 text-sm mb-4">{item.description}</p>
+                  <ul className="space-y-2">
+                    {item.points.map((point) => (
+                      <li key={point} className="flex items-start gap-2 text-sm text-gray-700">
+                        <CheckCircle className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
+                        <span>{point}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="mt-6">
+            <Link
+              href="/product/accessories"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-blue-600 hover:text-blue-700"
+            >
+              See all antennas, cables and mounting accessories
+              <span aria-hidden="true">→</span>
+            </Link>
           </div>
         </div>
 
@@ -540,8 +706,8 @@ const BWR352OutdoorProductPage = () => {
               </div>
               <h3 className="text-2xl font-bold text-gray-900 mb-2">Request a Quote</h3>
               <p className="text-gray-600">
-                Tell us about your outdoor site — we will confirm the enclosure kit, antenna leads and
-                whether a PoE adapter fits your installation.
+                Tell us about your outdoor site — we will confirm the enclosure kit, the antenna option
+                (internal or SMA), the power method and whether a connector or junction box fits your run.
               </p>
             </div>
 
@@ -577,8 +743,8 @@ const BWR352OutdoorProductPage = () => {
             </div>
 
             <p className="text-xs text-gray-500 text-center">
-              Please include product model (BWR_352_Outdoor), quantity, mounting type and your
-              application scenario in your email.
+              Please include product model (BWR_352_Outdoor), quantity, antenna option (internal / external
+              SMA), power method (DC / PoE), mounting type and your application scenario in your email.
             </p>
           </div>
         </div>

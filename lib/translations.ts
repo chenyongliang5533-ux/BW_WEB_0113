@@ -48,7 +48,7 @@ export const translations = {
         },
         {
           title: "Introducing BWR_352_Outdoor: IPX6 Housing for BWR-352",
-          description: "Take the BWR-352 board outdoors in a sealed ABS enclosure rated IPX6. Three waterproof cable glands route the 4G and Wi-Fi antennas plus your power, serial or Ethernet run, with wall and pole mounting and an optional PoE adapter.",
+          description: "Take the BWR-352 board outdoors in a 190 × 190 × 42 mm ABS enclosure rated IPX6. Four M12 glands route power, Ethernet, serial and antenna cables, with internal 4G/Wi-Fi antennas as standard or external SMA antennas as an option, DC or non-standard PoE power, and a quick-lock connector or IP68 junction box to finish the run.",
           date: "June 2026",
           tag: "New Product",
         },
@@ -142,7 +142,7 @@ export const translations = {
         },
         {
           title: "Presentamos el BWR_352_Outdoor: carcasa IPX6 para el BWR-352",
-          description: "Lleva la placa BWR-352 al exterior en una carcasa de ABS sellada con grado IPX6. Tres prensaestopas estancos dan salida a las antenas 4G y Wi-Fi y al cable de alimentación, serie o Ethernet, con montaje en pared y poste y adaptador PoE opcional.",
+          description: "Lleva la placa BWR-352 al exterior en una carcasa de ABS de 190 × 190 × 42 mm con grado IPX6. Cuatro prensaestopas M12 dan salida a la alimentación, Ethernet, serie y antena; antenas 4G/Wi-Fi internas de serie o antenas SMA externas en opción, alimentación DC o PoE no estándar, y conector rápido o caja de derivación IP68 para rematar la instalación.",
           date: "Junio 2026",
           tag: "Nuevo Producto",
         },
